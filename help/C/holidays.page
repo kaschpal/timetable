@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" id="holidays">
+ <title>Holidays and days off</title>
+ <topic>
+  <info>
+   <link type="guide" xref="index"/>
+  </info>
+ </topic>
+ <p>clicky</p>
+</page>

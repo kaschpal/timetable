@@ -1,0 +1,11 @@
+data/de.uleutner.timetable.desktop.in
+data/de.uleutner.timetable.appdata.xml.in
+data/de.uleutner.timetable.gschema.xml
+src/config.py
+src/DayGrid.py
+src/main.py
+src/MainWindow.py
+src/CalendarWindow.py
+src/SequenceWindow.py
+src/TimeTableStore.py
+src/WeekGrid.py

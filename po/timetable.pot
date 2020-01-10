@@ -1,0 +1,176 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the timetable package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: timetable\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-04 13:12+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/de.uleutner.timetable.desktop.in:3 src/MainWindow.py:38
+#: src/MainWindow.py:262 src/MainWindow.py:316
+msgid "timetable"
+msgstr ""
+
+#: data/de.uleutner.timetable.desktop.in:4
+msgid "de.uleutner.timetable"
+msgstr ""
+
+#. How the days are called
+#: src/config.py:36
+msgid "Monday"
+msgstr ""
+
+#: src/config.py:37
+msgid "Tuesday"
+msgstr ""
+
+#: src/config.py:38
+msgid "Wednesday"
+msgstr ""
+
+#: src/config.py:39
+msgid "Thursday"
+msgstr ""
+
+#: src/config.py:40
+msgid "Friday"
+msgstr ""
+
+#: src/config.py:41
+msgid "Saturday"
+msgstr ""
+
+#: src/config.py:42
+msgid "Sunday"
+msgstr ""
+
+#: src/config.py:43
+msgid "Mon"
+msgstr ""
+
+#: src/config.py:44
+msgid "Tue"
+msgstr ""
+
+#: src/config.py:45
+msgid "Wed"
+msgstr ""
+
+#: src/config.py:46
+msgid "Thu"
+msgstr ""
+
+#: src/config.py:47
+msgid "Fri"
+msgstr ""
+
+#: src/config.py:48
+msgid "Sat"
+msgstr ""
+
+#: src/config.py:49
+msgid "Sun"
+msgstr ""
+
+#: src/DayGrid.py:367
+msgid "today"
+msgstr ""
+
+#: src/MainWindow.py:42
+msgid "sequence"
+msgstr ""
+
+#: src/MainWindow.py:46
+msgid "calendar"
+msgstr ""
+
+#. after loading filename
+#. we fill in the aboutdialog
+#: src/MainWindow.py:81 src/MainWindow.py:197 src/MainWindow.py:249
+msgid "Timetable"
+msgstr ""
+
+#: src/MainWindow.py:113
+msgid "open timetable"
+msgstr ""
+
+#: src/MainWindow.py:114
+msgid "save timetable"
+msgstr ""
+
+#: src/MainWindow.py:115
+msgid "new timetable"
+msgstr ""
+
+#: src/MainWindow.py:116
+msgid "save and quit"
+msgstr ""
+
+#: src/MainWindow.py:117
+msgid "quit without saving"
+msgstr ""
+
+#: src/MainWindow.py:118
+msgid "About Timetable"
+msgstr ""
+
+#. choose new filename and directory
+#. create open dialog
+#: src/MainWindow.py:254 src/MainWindow.py:309
+msgid "Please choose file"
+msgstr ""
+
+#: src/MainWindow.py:258
+msgid "New.p"
+msgstr ""
+
+#: src/MainWindow.py:268 src/MainWindow.py:322
+msgid "all files"
+msgstr ""
+
+#. spinbutton for number of periods per day
+#: src/MainWindow.py:390
+msgid "periods to show"
+msgstr ""
+
+#. switch for "show saturday"
+#: src/MainWindow.py:405
+msgid "show saturday"
+msgstr ""
+
+#. switch for "autosave on quit"
+#: src/MainWindow.py:415
+msgid "save when quitting"
+msgstr ""
+
+#. switch for "debug mode"
+#: src/MainWindow.py:423
+msgid "debug mode"
+msgstr ""
+
+#: src/SequenceWindow.py:83
+msgid "#"
+msgstr ""
+
+#: src/SequenceWindow.py:84
+msgid "date"
+msgstr ""
+
+#: src/SequenceWindow.py:85
+msgid "h"
+msgstr ""
+
+#: src/SequenceWindow.py:86
+msgid "topic"
+msgstr ""
