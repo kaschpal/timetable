@@ -529,7 +529,7 @@ class Environment():
             except AttributeError:
                 pass
             else:
-                self.parent.hb.props.title = (language.applicationName + ": " + "(neu)")
+                self.parent.hb.props.title = (_("Timetable") + ": " + "(neu)")
             self.currentFileName = None
             return
 
@@ -546,7 +546,7 @@ class Environment():
         except AttributeError:
             pass
         else:
-            self.parent.hb.props.title = (language.applicationName + ": " + filename)
+            self.parent.hb.props.title = (_("Timetable") + ": " + filename)
 
         # set new filename in statefile
         self.currentFileName = filename

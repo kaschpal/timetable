@@ -27,6 +27,7 @@
         "*.a"
     ],
     "modules": [
+    	"python3-python-dateutil.json",
         {
             "name": "timetable",
             "builddir": true,
