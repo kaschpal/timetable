@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=timetable
+Icon=io.github.kaschpal.timetable
+Exec=timetable
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true
