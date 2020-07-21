@@ -214,7 +214,7 @@ class MainWindow(Gtk.ApplicationWindow):
         aboutdialog.set_website("http://github.com/kaschpal/timetable")
         aboutdialog.set_website_label("GitHub Page")
         aboutdialog.set_title("")
-        aboutdialog.set_logo_icon_name("de.uleutner.timetable")
+        aboutdialog.set_logo_icon_name("io.github.kaschpal.timetable")
 
         # to close the aboutdialog when "close" is clicked we connect the
         # "response" signal to on_close
@@ -440,12 +440,12 @@ class SettingsButton(Gtk.Button):
         grid.attach(sw, 1, 2, 1, 1)
 
         # switch for "debug mode"
-        lab = Gtk.Label(_("debug mode"))
-        lab.props.halign = Gtk.Align.START
-        grid.attach(lab, 0, 3, 1, 1)
-        sw = Gtk.Switch()
-        self.window.environment.settings.bind("debug", sw, "active", Gio.SettingsBindFlags.DEFAULT)
-        grid.attach(sw, 1, 3, 1, 1)
+        #lab = Gtk.Label(_("debug mode"))
+        #lab.props.halign = Gtk.Align.START
+        #grid.attach(lab, 0, 3, 1, 1)
+        #sw = Gtk.Switch()
+        #self.window.environment.settings.bind("debug", sw, "active", Gio.SettingsBindFlags.DEFAULT)
+        #grid.attach(sw, 1, 3, 1, 1)
 
         # signals
         self.__popover.add(grid)
@@ -505,7 +505,7 @@ class Environment():
             raise Exception("Cannot get GSettings  schema")
         self.settings = Gio.Settings.new_full(schema, None, config.dconfPath)
         """
-        self.settings = Gio.Settings.new('de.uleutner.timetable')
+        self.settings = Gio.Settings.new('io.github.kaschpal.timetable')
         dbglog(self.settings.list_keys())
 
         self.parent = parent

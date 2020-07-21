@@ -1,6 +1,11 @@
+subdir('C')
+
 gnome.yelp(meson.project_name(),
   sources: [
     'index.page',
-    'replacement_lesson.page'
+    'create_classes.page',
+    'memos.page',
+    'exceptions.page',
+    'day-off.page'
   ]
 )

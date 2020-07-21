@@ -1,6 +1,6 @@
-data/de.uleutner.timetable.desktop.in
-data/de.uleutner.timetable.appdata.xml.in
-data/de.uleutner.timetable.gschema.xml
+data/io.github.kaschpal.timetable.desktop.in
+data/io.github.kaschpal.timetable.appdata.xml.in
+data/io.github.kaschpal.timetable.gschema.xml
 src/config.py
 src/DayGrid.py
 src/main.py

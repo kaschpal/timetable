@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=timetable
-Icon=de.uleutner.timetable
-Exec=timetable
-Terminal=false
-Type=Application
-Categories=GTK;
-StartupNotify=true

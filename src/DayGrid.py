@@ -178,9 +178,9 @@ class CalendarButton(Gtk.Button):
         self.parent = parent
 
         # init icons
-        icon = Gio.ThemedIcon(name="de.uleutner.star-grey")
+        icon = Gio.ThemedIcon(name="io.github.kaschpal.star-grey")
         self.__empty_image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
-        icon = Gio.ThemedIcon(name="de.uleutner.star-orange")
+        icon = Gio.ThemedIcon(name="io.github.kaschpal.star-orange")
         self.__not_empty_image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
         self.__current_image = None
 

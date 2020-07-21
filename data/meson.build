@@ -1,6 +1,6 @@
 desktop_file = i18n.merge_file(
-  input: 'de.uleutner.timetable.desktop.in',
-  output: 'de.uleutner.timetable.desktop',
+  input: 'io.github.kaschpal.timetable.desktop.in',
+  output: 'io.github.kaschpal.timetable.desktop',
   type: 'desktop',
   po_dir: '../po',
   install: true,
@@ -15,8 +15,8 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-  input: 'de.uleutner.timetable.appdata.xml.in',
-  output: 'de.uleutner.timetable.appdata.xml',
+  input: 'io.github.kaschpal.timetable.appdata.xml.in',
+  output: 'io.github.kaschpal.timetable.appdata.xml',
   po_dir: '../po',
   install: true,
   install_dir: join_paths(get_option('datadir'), 'appdata')
@@ -29,7 +29,7 @@ if appstream_util.found()
   )
 endif
 
-install_data('de.uleutner.timetable.gschema.xml',
+install_data('io.github.kaschpal.timetable.gschema.xml',
   install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
 )
 

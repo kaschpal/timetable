@@ -17,14 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: data/de.uleutner.timetable.desktop.in:3 src/MainWindow.py:38
+#: data/io.github.kaschpal.timetable.desktop.in:3 src/MainWindow.py:38
 #: src/MainWindow.py:262 src/MainWindow.py:316
 msgid "timetable"
 msgstr "timetable"
 
-#: data/de.uleutner.timetable.desktop.in:4
-msgid "de.uleutner.timetable"
-msgstr "de.uleutner.timetable"
+#: data/io.github.kaschpal.timetable.desktop.in:4
+msgid "io.github.kaschpal.timetable"
+msgstr "io.github.kaschpal.timetable"
 
 #. How the days are called
 #: src/config.py:36
@@ -123,7 +123,7 @@ msgstr "quit without saving"
 
 #: src/MainWindow.py:118
 msgid "About Timetable"
-msgstr "About Timetable"
+msgstr "about Timetable"
 
 #. choose new filename and directory
 #. create open dialog

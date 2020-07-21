@@ -17,13 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/de.uleutner.timetable.desktop.in:3 src/MainWindow.py:38
+#: data/io.github.kaschpal.timetable.desktop.in:3 src/MainWindow.py:38
 #: src/MainWindow.py:262 src/MainWindow.py:316
 msgid "timetable"
 msgstr ""
 
-#: data/de.uleutner.timetable.desktop.in:4
-msgid "de.uleutner.timetable"
+#: data/io.github.kaschpal.timetable.desktop.in:4
+msgid "io.github.kaschpal.timetable"
 msgstr ""
 
 #. How the days are called

@@ -11,7 +11,7 @@ from .config import dbglog
 
 class Uplan(Gtk.Application):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, application_id="de.uleutner.timetable",
+        super().__init__(*args, application_id="io.github.kaschpal.timetable",
                          #flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
                          **kwargs)
         self.window = None

@@ -1,4 +1,13 @@
 = Timetable
   [guide]
 
-lala
+Timetable imitates a classical calendar/planner for teachers.
+
+The topic of the lesson is assigned by the sequence. If you shift the lesson, i.e. by adding a replacement lesson, the topic is moved
+automatically by the order of the sequenece.
+
+In the sequence view, you can edit the topic and the chronological order. Every line is one topic. The list of sequences is an ordinary
+text field, which means, you can copy and paste to or from a textfile.
+The classes in the sequence view are created dynamically. You don't have to keep a list of your classes in the settings.
+Note that a classname, which $em(only) appears as temperary entry in the timetable view (dot-entry), will not show up in the
+sequence view.  
