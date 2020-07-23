@@ -1,10 +1,10 @@
-= Exceptions, replacement lessons, shifting lessons
+= Exceptions, substitute lessons, shifting lessons
   [topic]
 @link[guide >index]
 
-Temporary class entries are created by a classname, which is prepended by a dot. An example for a temporary class entry is ".9c".
-Dot-enties are used for shifting and replacement lessons. They are not repeated and do not affect repetition of the original entry.
+Temporary class entries are created by a classname, which is preceeded by a dot. No leading spaces are allowed. An example for a temporary class entry is ".9c".
+Dot enties are used for shifting and substitute lessons. They are not repeated and do not affect repetition of the original entry.
 
 If a lesson is simply cancelled, use only a dot (".") as class entry.
 
-Dot-entries are also printed in red.
+Dot entries are also shown in red.
