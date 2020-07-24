@@ -8,6 +8,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <content_rating type="oars-1.0" />
+  <url type="homepage">https://github.com/kaschpal/timetable</url>
 
   <description>
     <p>
@@ -37,4 +38,11 @@
       <image>https://raw.githubusercontent.com/kaschpal/timetable/master/pics/screenshot3.png</image>
     </screenshot>
   </screenshots>
-</component>
+  <releases>
+    <release version="1.0" date="2020-07-24">
+      <description>
+        <p>First public release as package</p>
+      </description>
+    </release>
+  </releases>
+  </component>
