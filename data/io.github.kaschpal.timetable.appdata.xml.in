@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>io.github.kaschpal.timetable</id>
-
   <name>Timetable</name>
   <summary>A calendar/planner for teachers and maybe stundents</summary>
-
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <content_rating type="oars-1.0" />
   <url type="homepage">https://github.com/kaschpal/timetable</url>
-
   <description>
     <p>
      Timetable imitates a classic calendar/planner for teachers.
     </p>
     <p>
      The topic of the lesson is determined by the curricular sequence. If you shift the lesson, e.g. by adding a substitute lesson, the topic is moved.
-    </p>
-    <p>
-     In the sequence view, you can edit the topic and the chronological order. Every line is one topic. The list of topics is an ordinary
-     text field, which means you can copy and paste to or from a textfile.
-     The classes in the sequence view are created dynamically. You don't have to keep a list of your classes in the settings.
     </p>
   </description>
   <categories>
