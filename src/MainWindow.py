@@ -207,7 +207,7 @@ class MainWindow(Gtk.ApplicationWindow):
         # we fill in the aboutdialog
         aboutdialog.set_program_name(_("Timetable"))
         aboutdialog.set_copyright(
-            "Copyright 2018 Ulrich Leutner")
+            "Copyright 2020 Ulrich Leutner")
         aboutdialog.set_authors(authors)
         aboutdialog.set_license_type(Gtk.License.GPL_3_0)
         #aboutdialog.set_documenters(documenters)
