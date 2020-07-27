@@ -1,6 +1,8 @@
 = Timetable
   [guide]
 
+$media[type="image" src='pics/logo.svg' width='200']()
+
 Timetable imitates a classic calendar/planner for teachers.
 
 The topic of the lesson is determined by the curricular sequence. If you shift the lesson, e.g. by adding a substitute lesson, the topic is moved
@@ -11,3 +13,4 @@ text field, which means you can copy and paste to or from a textfile.
 The classes in the sequence view are created dynamically. You don't have to keep a list of your classes in the settings.
 Note that a classname which $em(only) appears as temperary entry in the timetable view (dot entry) will not show up in the
 sequence view.  
+

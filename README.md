@@ -23,7 +23,7 @@ sequence view.
 
 The classes are written in the small text field of the day matrix.
 In the larger field you write the topic of the lesson. The entered classname is repeated every week starting from the date you created it, so
-you have to transfer your timetable only in the first week of school. If you change the entry to something different, $em(this changed class)
+you have to transfer your timetable only in the first week of school. If you change the entry to something different, *this changed class*
 is repeated from now on. To end repetition, you delete the entry (=string "").
 
 Note that every change in the class entry has to be confirmed either by hitting enter or by leaving the entry (i.e. tab or mouse click into a

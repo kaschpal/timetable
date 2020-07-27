@@ -8,3 +8,15 @@ Dot enties are used for shifting and substitute lessons. They are not repeated a
 If a lesson is simply cancelled, use only a dot (".") as class entry.
 
 Dot entries are also shown in red.
+
+$media[type="image" src='pics/ex-start.png' width='500']()
+
+The image above shows one day in regular order.
+
+$media[type="image" src='pics/ex-stop.png' width='500']()
+
+Now the following happened:
+
+* The lesson in 12M is cancelled.
+* The lesson in 9c is shifted to the next day.
+* The lessons in 7a und 10d are commuted.

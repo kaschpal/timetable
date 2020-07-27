@@ -2,12 +2,22 @@
   [topic]
 @link[guide >index]
 
+
+
+
 The classes are written in the small text field of the day matrix.
 In the larger field you write the topic of the lesson. The entered classname is repeated every week starting from the date you created it, so
 you have to transfer your timetable only in the first week of school. If you change the entry to something different, $em(this changed class)
-is repeated from now on. To end repetition, you delete the entry (=string "").
+is repeated from now on. To end repetition, you delete the entry (=string "") at the first date where it should appear no more.
+
+$media[type="image" src='pics/new-classes.png' width='500']()
 
 Note that every change in the class entry has to be confirmed either by hitting enter or by leaving the entry (i.e. tab or mouse click into a
 different cell). This has technical reasons due to the dynamic design of the application.
 
 The first time a class is entered, the entry is shown in red colour. This is for quickly finding it again.
+
+$media[type="image" src='pics/new-classes-seq.png' width='500']()
+
+The classes appear in the sequence view at once. Note that "x" does not because it has a leading dot which means, it is
+not repeated.

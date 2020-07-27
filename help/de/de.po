@@ -1,0 +1,104 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: timetable\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-04 13:12+0100\n"
+"PO-Revision-Date: 2019-11-04 13:12+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr ""
+
+#. (itstool) path: page/title
+#: ../C/create_classes.page:6
+msgid "Create classes and start with your timetable"
+msgstr "Klassen anlegen und Stundenplan eintragen"
+
+#. (itstool) path: page/p
+#: ../C/create_classes.page:7
+msgid "The classes are written in the small text field of the day matrix. In the larger field you write the topic of the lesson. The entered classname is repeated every week starting from the date you created it, so you have to transfer your timetable only in the first week of school. If you change the entry to something different, <em>this changed class</em> is repeated from now on. To end repetition, you delete the entry (=string \"\")."
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/create_classes.page:11
+msgid "Note that every change in the class entry has to be confirmed either by hitting enter or by leaving the entry (i.e. tab or mouse click into a different cell). This has technical reasons due to the dynamic design of the application."
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/create_classes.page:13
+msgid "The first time a class is entered, the entry is shown in red colour. This is for quickly finding it again."
+msgstr ""
+
+#. (itstool) path: page/title
+#: ../C/day-off.page:6
+msgid "Holidays and days off"
+msgstr "Ferien und schulfreie Tage"
+
+#. (itstool) path: page/p
+#: ../C/day-off.page:7
+msgid "If a day is a holiday or you get sick or you attend an advanced training, you can deactivate all lessons for this date. Simply uncheck the checkbox right of the date (at the top)."
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/day-off.page:9
+msgid "This can be undone."
+msgstr ""
+
+#. (itstool) path: page/title
+#: ../C/exceptions.page:6
+msgid "Exceptions, substitute lessons, shifting lessons"
+msgstr "Ausnahmen, Vertretungsstunden, Stunden verschieben"
+
+#. (itstool) path: page/p
+#: ../C/exceptions.page:7
+msgid "Temporary class entries are created by a classname, which is preceeded by a dot. No leading spaces are allowed. An example for a temporary class entry is \".9c\". Dot enties are used for shifting and substitute lessons. They are not repeated and do not affect repetition of the original entry."
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/exceptions.page:9
+msgid "If a lesson is simply cancelled, use only a dot (\".\") as class entry."
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/exceptions.page:10
+msgid "Dot entries are also shown in red."
+msgstr ""
+
+#. (itstool) path: page/title
+#: ../C/index.page:3
+msgid "Timetable"
+msgstr "Stundenplan"
+
+#. (itstool) path: page/p
+#: ../C/index.page:4
+msgid "Timetable imitates a classic calendar/planner for teachers."
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/index.page:5
+msgid "The topic of the lesson is determined by the curricular sequence. If you shift the lesson, e.g. by adding a substitute lesson, the topic is moved automatically according to the order of the curricular sequence."
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/index.page:7
+msgid "In the sequence view, you can edit the topic and the chronological order. Every line is one topic. The list of topics is an ordinary text field, which means you can copy and paste to or from a textfile. The classes in the sequence view are created dynamically. You don't have to keep a list of your classes in the settings. Note that a classname which <em>only</em> appears as temperary entry in the timetable view (dot entry) will not show up in the sequence view."
+msgstr ""
+
+#. (itstool) path: page/title
+#: ../C/memos.page:6
+msgid "Memos and the calendar"
+msgstr "Erinnerungen und der Kalender"
+
+#. (itstool) path: page/p
+#: ../C/memos.page:7
+msgid "The star at the top of every day can be used for memos. It turns orange if a memo for this day exists. If you have to add a lot of appointments at once, the calendar view is useful. Here you can also edit the memos, which appear in the timetable view."
+msgstr ""
+
