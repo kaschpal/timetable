@@ -5,8 +5,12 @@ $media[type="image" src='pics/logo.svg' width='200']()
 
 Timetable imitates a classic calendar/planner for teachers.
 
+$media[type="image" src='pics/screenshot-tt.png' width='600']()
+
 The topic of the lesson is determined by the curricular sequence. If you shift the lesson, e.g. by adding a substitute lesson, the topic is moved
 automatically according to the order of the curricular sequence.
+
+$media[type="image" src='pics/screenshot-seq.png' width='600']()
 
 In the sequence view, you can edit the topic and the chronological order. Every line is one topic. The list of topics is an ordinary
 text field, which means you can copy and paste to or from a textfile.

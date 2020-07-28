@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timetable\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-04 13:12+0100\n"
+"POT-Creation-Date: 2020-07-28 13:13+0200\n"
 "PO-Revision-Date: 2019-11-04 13:12+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -24,18 +24,79 @@ msgstr "Klassen anlegen und Stundenplan eintragen"
 
 #. (itstool) path: page/p
 #: ../C/create_classes.page:7
-msgid "The classes are written in the small text field of the day matrix. In the larger field you write the topic of the lesson. The entered classname is repeated every week starting from the date you created it, so you have to transfer your timetable only in the first week of school. If you change the entry to something different, <em>this changed class</em> is repeated from now on. To end repetition, you delete the entry (=string \"\")."
+msgid ""
+"The classes are written in the small text field of the day matrix. In the "
+"larger field you write the topic of the lesson. The entered classname is "
+"repeated every week starting from the date you created it, so you have to "
+"transfer your timetable only in the first week of school. If you change the "
+"entry to something different, <em>this changed class</em> is repeated from "
+"now on. To end repetition, you delete the entry (=string \"\") at the first "
+"date where it should appear no more."
 msgstr ""
+"Die Klassen werden in dem kleineren Textfeld eingetragen, welches sich im Tagesraster befindet."
+"Im größeren Textfeld trägt man das Thema der Stunde ein. Der eingetragene Klassename"
+"wird von jetzt an wöchentlich wiederholt. Der Stundenplan muss also nur für die erste Schulwoche"
+"übertragen werden."
+"Wird der Eintrag des Klassennames später geändert, wiederholt sich von da an die Änderung jede Woche."
+"Soll der Eintrag nicht mehr wiederholt werden, wird er an der Stelle gelöscht (=String \"\"), "
+"wo er nicht mehr auftauchen soll."
 
-#. (itstool) path: page/p
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
 #: ../C/create_classes.page:11
-msgid "Note that every change in the class entry has to be confirmed either by hitting enter or by leaving the entry (i.e. tab or mouse click into a different cell). This has technical reasons due to the dynamic design of the application."
+msgctxt "_"
+msgid ""
+"external ref='pics/new-classes.png' md5='89ae5b76bdab6159d23ef83b6b3feab7'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: ../C/create_classes.page:13
-msgid "The first time a class is entered, the entry is shown in red colour. This is for quickly finding it again."
+#: ../C/create_classes.page:12
+msgid ""
+"Note that every change in the class entry has to be confirmed either by "
+"hitting enter or by leaving the entry (i.e. tab or mouse click into a "
+"different cell). This has technical reasons due to the dynamic design of the "
+"application."
 msgstr ""
+"Man beachte, dass jede Änderung am Klasseneintrag mit der Eingabtaste (=Enter)"
+"bestätigt werden muss. Alternativ wird der Eintrag auch gespeichert, wenn man aus"
+"der Zelle herausspringt (Tab oder Mausklick irgendwo anders hin)."
+"Das liegt am dynamischen Design der Anwendung und ist nicht wirklich anders möglich."
+
+
+#. (itstool) path: page/p
+#: ../C/create_classes.page:14
+msgid ""
+"The first time a class is entered, the entry is shown in red colour. This is "
+"for quickly finding it again."
+msgstr ""
+"Wo die Klasse eingetragen wurde, erscheint"
+"der Eintrag in rot. So kann man diese Stelle später wieder leichter finden."
+
+
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: ../C/create_classes.page:15
+msgctxt "_"
+msgid ""
+"external ref='pics/new-classes-seq.png' "
+"md5='677916a2da46bd362753404a1507c870'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/create_classes.page:16
+msgid ""
+"The classes appear in the sequence view at once. Note that \"x\" does not "
+"because it has a leading dot which means, it is not repeated."
+msgstr ""
+"Die Klassen tauchen in der Sequenz-Ansicht sofort auf. Man beachte,"
+"dass das für \"x\" nicht zutrifft. Der Punkt am Anfang bedeutet, dass dieser Eintrag"
+"nur einmal vorkommen soll. Da es ihn deshalb nur einmal gibt, wird keine Sequenz angelegt."
 
 #. (itstool) path: page/title
 #: ../C/day-off.page:6
@@ -44,13 +105,30 @@ msgstr "Ferien und schulfreie Tage"
 
 #. (itstool) path: page/p
 #: ../C/day-off.page:7
-msgid "If a day is a holiday or you get sick or you attend an advanced training, you can deactivate all lessons for this date. Simply uncheck the checkbox right of the date (at the top)."
+msgid ""
+"If a day is a holiday or you get sick or you attend an advanced training, "
+"you can deactivate all lessons for this date. Simply uncheck the checkbox "
+"right of the date (at the top)."
+msgstr ""
+"Im Falle von Ferien, Feiertagen, Krankeit oder Fortbildungen, können alle Stunden für"
+"diesen Tag ausgeschaltet werden. Dazu kann man den Tag mit Hilfe der Checkbox"
+"neben dem Datum ausschalten."
+
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: ../C/day-off.page:9
+msgctxt "_"
+msgid ""
+"external ref='pics/day-on-off.png' md5='17680d685d24ec4da5ad0934ca8cb156'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: ../C/day-off.page:9
+#: ../C/day-off.page:10
 msgid "This can be undone."
-msgstr ""
+msgstr "Das kann man auch wieder rückgängig machen."
 
 #. (itstool) path: page/title
 #: ../C/exceptions.page:6
@@ -59,46 +137,194 @@ msgstr "Ausnahmen, Vertretungsstunden, Stunden verschieben"
 
 #. (itstool) path: page/p
 #: ../C/exceptions.page:7
-msgid "Temporary class entries are created by a classname, which is preceeded by a dot. No leading spaces are allowed. An example for a temporary class entry is \".9c\". Dot enties are used for shifting and substitute lessons. They are not repeated and do not affect repetition of the original entry."
+msgid ""
+"Temporary class entries are created by a classname, which is preceeded by a "
+"dot. No leading spaces are allowed. An example for a temporary class entry "
+"is \".9c\". Dot enties are used for shifting and substitute lessons. They "
+"are not repeated and do not affect repetition of the original entry."
 msgstr ""
+"Wird dem Klasseneintrag ein Punkt vorangestellt, so ist dieser Eintrag eine Ausnahme."
+"Ein Beispiel für einen Ausnahmeeintrag wäre z.B. \".9c\"."
+"Diese Punkt-Einträge werden zum Verschieben von Stunden oder Vertretungsstunden"
+"benutzt. Sie wiederholen sich nicht und beenden auch nicht die Wiederholung des Eintrages,"
+"der normalerweise an diesem Ort stehen würde."
 
 #. (itstool) path: page/p
 #: ../C/exceptions.page:9
 msgid "If a lesson is simply cancelled, use only a dot (\".\") as class entry."
-msgstr ""
+msgstr "Fällt eine Stunde einfach aus, verwendet man nur einen Punkt (\".\") als Klasseneintrag."
 
 #. (itstool) path: page/p
 #: ../C/exceptions.page:10
 msgid "Dot entries are also shown in red."
+msgstr "Punkt-Einträge werden ebenfalls rot angezeigt."
+
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: ../C/exceptions.page:11
+msgctxt "_"
+msgid "external ref='pics/ex-start.png' md5='6a53feb3523e7c607778b80784953b57'"
 msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/exceptions.page:12
+msgid "The image above shows one day in regular order."
+msgstr "Das obere Bild zeigt einen Tag in seiner planmäßigen Reihenfolge."
+
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: ../C/exceptions.page:13
+msgctxt "_"
+msgid "external ref='pics/ex-stop.png' md5='d47ba939c4f5c36dc4ac26a6901fc6f7'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/exceptions.page:14
+msgid "Now the following happened:"
+msgstr "Das folgende ist nun passiert:"
+
+#. (itstool) path: item/p
+#: ../C/exceptions.page:17
+msgid "The lesson in 12M is cancelled."
+msgstr "Die Stunde in der 12M fällt aus."
+
+#. (itstool) path: item/p
+#: ../C/exceptions.page:20
+msgid "The lesson in 9c is shifted to the next day."
+msgstr "Die Stunde in der 9c wird auf den nächsten Tag verschoben."
+
+#. (itstool) path: item/p
+#: ../C/exceptions.page:23
+msgid "The lessons in 7a und 10d are commuted."
+msgstr "Die Stunden in der 7a und 10d wurden getauscht."
 
 #. (itstool) path: page/title
 #: ../C/index.page:3
 msgid "Timetable"
 msgstr "Stundenplan"
 
-#. (itstool) path: page/p
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
 #: ../C/index.page:4
-msgid "Timetable imitates a classic calendar/planner for teachers."
+msgctxt "_"
+msgid "external ref='pics/logo.svg' md5='817d2e3ed0c230ae6dc73bbf142d06a5'"
 msgstr ""
 
 #. (itstool) path: page/p
 #: ../C/index.page:5
-msgid "The topic of the lesson is determined by the curricular sequence. If you shift the lesson, e.g. by adding a substitute lesson, the topic is moved automatically according to the order of the curricular sequence."
+msgid "Timetable imitates a classic calendar/planner for teachers."
+msgstr "Stundenplan bildet einen klassichen Lehrerkalender bzw. -planer nach."
+
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: ../C/index.page:6
+msgctxt "_"
+msgid ""
+"external ref='pics/screenshot-tt.png' md5='a3d28c7712033d9d866fa9641a570b12'"
 msgstr ""
 
 #. (itstool) path: page/p
 #: ../C/index.page:7
-msgid "In the sequence view, you can edit the topic and the chronological order. Every line is one topic. The list of topics is an ordinary text field, which means you can copy and paste to or from a textfile. The classes in the sequence view are created dynamically. You don't have to keep a list of your classes in the settings. Note that a classname which <em>only</em> appears as temperary entry in the timetable view (dot entry) will not show up in the sequence view."
+msgid ""
+"The topic of the lesson is determined by the curricular sequence. If you "
+"shift the lesson, e.g. by adding a substitute lesson, the topic is moved "
+"automatically according to the order of the curricular sequence."
 msgstr ""
+"Das Thema der Stunde wird von der Sequenz bestimmt. Wird eine Stunde"
+"verschoben, verschiebt sich automatisch auch das Stundenthema."
+
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: ../C/index.page:9
+msgctxt "_"
+msgid ""
+"external ref='pics/screenshot-seq.png' md5='f2d3dd35d71951d9e50c751c2d7f9032'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/index.page:10
+msgid ""
+"In the sequence view, you can edit the topic and the chronological order. "
+"Every line is one topic. The list of topics is an ordinary text field, which "
+"means you can copy and paste to or from a textfile. The classes in the "
+"sequence view are created dynamically. You don't have to keep a list of your "
+"classes in the settings. Note that a classname which <em>only</em> appears "
+"as temperary entry in the timetable view (dot entry) will not show up in the "
+"sequence view."
+msgstr ""
+"In der Sequenz-Ansicht können die Stundenthemen und die Reihenfolge bearbeitet werden."
+"Jede Zeile ist ein Stundenthema. Diese Liste ist ein normales Textfeld. Man kann also"
+"in oder aus einer Textdatei einfügen bzw. kopieren."
+"Die Klassen der Sequenzen werden dynamisch aus der Stundenplan-Ansicht erzeugt."
+"Es gibt also keine Liste-von-Klassen in irgendwelchen Einstellungsdialogen."
+"Eine Klasse, die <em>ausschließlich</em> als Ausnahme (Punkt-Eintrag) existiert, taucht"
+"in der Sequenz-Ansicht nicht auf."
 
 #. (itstool) path: page/title
 #: ../C/memos.page:6
 msgid "Memos and the calendar"
 msgstr "Erinnerungen und der Kalender"
 
-#. (itstool) path: page/p
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
 #: ../C/memos.page:7
-msgid "The star at the top of every day can be used for memos. It turns orange if a memo for this day exists. If you have to add a lot of appointments at once, the calendar view is useful. Here you can also edit the memos, which appear in the timetable view."
+msgctxt "_"
+msgid "external ref='pics/memo.png' md5='e4a39ca9a37910541170e67b2ffc8a4e'"
 msgstr ""
 
+#. (itstool) path: page/p
+#: ../C/memos.page:8
+msgid "The star at the top of every day can be used for memos."
+msgstr "Der Stern am Anfang jedes Tages kann für Erinnungen verwendet werden."
+
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: ../C/memos.page:9
+msgctxt "_"
+msgid "external ref='pics/star.png' md5='17fb22596a265b9c887e5b168d46c710'"
+msgstr ""
+
+#. (itstool) path: page/p
+#: ../C/memos.page:10
+msgid "It turns orange if a memo for this day exists."
+msgstr "Er wird orange angezeigt, wenn für diesen Tag eine Erinnerung besteht."
+
+#. (itstool) path: page/p
+#: ../C/memos.page:11
+msgid ""
+"If you have to add a lot of appointments at once, the calendar view is "
+"useful. Here you can also edit the memos, which appear in the timetable view."
+msgstr ""
+"Sollen viele Termine auf einmal eingetragen werden, ist die Kalender-Ansicht praktisch."
+"Die dort eingetragenen Erinnerungen tauchen dann in der Stundenplan-Ansicht auf."
+
+#. (itstool) path: p/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: ../C/memos.page:13
+msgctxt "_"
+msgid "external ref='pics/calendar.png' md5='419c1ce02c6ebf62a41f2276bdb1c5e9'"
+msgstr ""

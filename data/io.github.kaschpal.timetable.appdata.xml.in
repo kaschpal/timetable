@@ -31,6 +31,16 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.1" date="2020-07-28">
+      <description>
+        <p>In 1.1 content got updated.</p>
+          <ul>
+           <li>Italian translation of the UI added</li>
+           <li>Screenshots were added to the helpfiles</li>
+           <li>German translation of the helpfiles was added</li>
+          </ul>
+      </description>
+    </release>
     <release version="1.0" date="2020-07-24">
       <description>
         <p>First public release as package</p>

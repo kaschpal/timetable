@@ -9,6 +9,8 @@ gnome.yelp(meson.project_name(),
     'day-off.page'
   ],
   media: ['pics/logo.svg',
+  	'pics/screenshot-tt.png',
+  	'pics/screenshot-seq.png',
   	'pics/new-classes.png',
   	'pics/new-classes-seq.png',
   	'pics/day-on-off.png',
