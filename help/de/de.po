@@ -20,7 +20,7 @@ msgstr ""
 #. (itstool) path: page/title
 #: ../C/create_classes.page:6
 msgid "Create classes and start with your timetable"
-msgstr "Klassen anlegen und Stundenplan eintragen"
+msgstr "Anlegen von Klassen und Stundenplan eintragen"
 
 #. (itstool) path: page/p
 #: ../C/create_classes.page:7
