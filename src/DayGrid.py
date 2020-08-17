@@ -271,6 +271,8 @@ class ClassEntry(Gtk.Entry):
 
         self.update()
 
+
+
     def __onFocusOut(self, *argv):
         self.__onChange(self)
 
@@ -357,7 +359,10 @@ class TopicEntry(Gtk.Entry):
         self.weekday = weekday
         self.period = period
         self.changeHandler = self.connect("changed", self.__onChange)
-        self.connect("button-press-event", self.__onDoubleClick)
+        #self.connect("button-press-event", self.__onDoubleClick)
+        #self.connect("motion-notify-event", self.__on_move_cursor)
+        self.connect("key-press-event",self.__on_jump)
+
         self.update()
 
     def __onChange(self, entry):
@@ -370,9 +375,41 @@ class TopicEntry(Gtk.Entry):
         self.parent.parent.window.environment.timeTab.changeTopic(date, period, topic)
         self.update()
 
-    def __onDoubleClick(self, entry, eventButton):
-        if eventButton.type == Gdk.EventType.DOUBLE_BUTTON_PRESS:
-            dbglog("*** double")
+    def __on_jump(self, widget, event):
+        # check the event modifiers (can also use SHIFTMASK, etc)
+        ctrl = (event.state & Gdk.ModifierType.CONTROL_MASK)
+
+        # see if we recognise a keypress
+        if ctrl and event.keyval == Gdk.KEY_j:
+            print("***J")
+
+            # class tab to jump to
+            class_name = self.parent.parent.window.environment.timeTab.getClassName(self.date, self.period)
+
+            # line number to jump to
+            position = self.parent.parent.window.environment.timeTab.get_position_in_sequence(self.date, self.period)
+            print(class_name)
+            print(position)
+
+            # prevent jumping to solo-dot-classes
+            if class_name not in self.parent.parent.window.environment.timeTab.getClassList():
+                return
+
+            # to sequence view an to class
+            nb = self.parent.parent.window.classNoteb
+            tab = nb.get_tab(class_name)
+            tv = tab.sequenceTextView
+
+            self.parent.parent.window.stack.set_visible_child_name("sequence")
+            nb.switch_to_tab(class_name)
+
+            # focus
+            tv.grab_focus()
+
+            # set postion in textfield
+            cursor = tab.sequenceBuf.get_iter_at_line(position)
+            tab.sequenceBuf.place_cursor(cursor)
+
 
     def update(self):
         """Gets all relevant information from
