@@ -21,12 +21,14 @@ class ClassNotebook(Gtk.Notebook):
         self.set_scrollable( True )
         self.__savelist = []
         self.currentPage = None
+        #self.update_tabs()
+        #print("nb created")
 
     def showHandler(self, wid):
         """When the notebook becomes visible, update all tabs."""
         self.update()
 
-    def update(self):
+    def update_tabs(self):
         """Refreshes the tabs and updates the sequences."""
         # first, remove all
         for tab in self.__tabs:
@@ -43,8 +45,9 @@ class ClassNotebook(Gtk.Notebook):
             self.__tabs.append(page)
             page.update()
 
+    def update(self):
+        self.update_tabs()
         self.show_all()
-
 
 
     def switch_to_tab(self, class_name):

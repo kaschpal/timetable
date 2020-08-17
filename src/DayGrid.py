@@ -381,34 +381,42 @@ class TopicEntry(Gtk.Entry):
 
         # see if we recognise a keypress
         if ctrl and event.keyval == Gdk.KEY_j:
-            print("***J")
+            nb = self.parent.parent.window.classNoteb
+            nb.update_tabs()   # if the sequence view has never been started, the tabs are not created yet
 
             # class tab to jump to
             class_name = self.parent.parent.window.environment.timeTab.getClassName(self.date, self.period)
 
             # line number to jump to
             position = self.parent.parent.window.environment.timeTab.get_position_in_sequence(self.date, self.period)
-            print(class_name)
-            print(position)
 
             # prevent jumping to solo-dot-classes
             if class_name not in self.parent.parent.window.environment.timeTab.getClassList():
                 return
 
-            # to sequence view an to class
-            nb = self.parent.parent.window.classNoteb
-            tab = nb.get_tab(class_name)
-            tv = tab.sequenceTextView
-
+            # to sequence view to class
             self.parent.parent.window.stack.set_visible_child_name("sequence")
             nb.switch_to_tab(class_name)
 
             # focus
+            tab = nb.get_tab(class_name)
+            tv = tab.sequenceTextView
             tv.grab_focus()
+            #print("focus = " + str(tv.has_focus()))
+            #print("tv = " + str(tv))
 
             # set postion in textfield
             cursor = tab.sequenceBuf.get_iter_at_line(position)
+            res = tv.scroll_to_iter(cursor, 0.0, True, 0.5, 0.5)
             tab.sequenceBuf.place_cursor(cursor)
+
+            # select line
+            line_begin = tab.sequenceBuf.get_iter_at_line(position) # again, since forward_to_line does not return a copy
+            cursor.forward_to_line_end()
+            tab.sequenceBuf.select_range(line_begin, cursor)
+
+            print(res)
+            #
 
 
     def update(self):
