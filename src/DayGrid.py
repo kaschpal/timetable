@@ -133,6 +133,12 @@ class DayGrid(Gtk.Grid):
         self.parent.update()
 
 
+    def get_topic_entry(self, period):
+        """Returns the topic entry by the period. This is for jumping."""
+        for widget in self.__updateList:
+            if type(widget) is TopicEntry: # only relevant ones
+                if widget.period == period:
+                    return widget
 
 
     def update(self):
@@ -271,6 +277,8 @@ class ClassEntry(Gtk.Entry):
 
         self.update()
 
+
+
     def __onFocusOut(self, *argv):
         self.__onChange(self)
 
@@ -357,7 +365,10 @@ class TopicEntry(Gtk.Entry):
         self.weekday = weekday
         self.period = period
         self.changeHandler = self.connect("changed", self.__onChange)
-        self.connect("button-press-event", self.__onDoubleClick)
+        #self.connect("button-press-event", self.__onDoubleClick)
+        #self.connect("motion-notify-event", self.__on_move_cursor)
+        self.connect("key-press-event",self.__on_jump)
+
         self.update()
 
     def __onChange(self, entry):
@@ -370,9 +381,50 @@ class TopicEntry(Gtk.Entry):
         self.parent.parent.window.environment.timeTab.changeTopic(date, period, topic)
         self.update()
 
-    def __onDoubleClick(self, entry, eventButton):
-        if eventButton.type == Gdk.EventType.DOUBLE_BUTTON_PRESS:
-            dbglog("*** double")
+    def __on_jump(self, widget, event):
+        # check the event modifiers (can also use SHIFTMASK, etc)
+        ctrl = (event.state & Gdk.ModifierType.CONTROL_MASK)
+
+        # see if we recognise a keypress
+        if ctrl and event.keyval == Gdk.KEY_j:
+            nb = self.parent.parent.window.classNoteb
+            nb.update_tabs()   # if the sequence view has never been started, the tabs are not created yet
+
+            # class tab to jump to
+            class_name = self.parent.parent.window.environment.timeTab.getClassName(self.date, self.period)
+
+            # line number to jump to
+            position = self.parent.parent.window.environment.timeTab.get_position_in_sequence(self.date, self.period)
+
+            # prevent jumping to solo-dot-classes
+            if class_name not in self.parent.parent.window.environment.timeTab.getClassList():
+                return
+
+            # to sequence view to class
+            self.parent.parent.window.stack.set_visible_child_name("sequence")
+            nb.switch_to_tab(class_name)
+
+            # focus
+            tab = nb.get_tab(class_name)
+            tv = tab.sequenceTextView
+            tv.grab_focus()
+
+            # set postion in textfield
+            buf = tab.sequenceBuf
+            cursor = buf.get_iter_at_line(position)
+            res = tv.scroll_to_iter(cursor, 0.0, True, 0.5, 0.5)
+            buf.place_cursor(cursor)
+
+            # select line
+            line_begin = buf.get_iter_at_line(position) # again, since forward_to_line does not return a copy
+            cursor.forward_to_line_end()
+            buf.select_range(line_begin, cursor)
+
+
+            # scroll
+            tv.scroll_mark_onscreen(buf.get_insert())
+
+
 
     def update(self):
         """Gets all relevant information from
@@ -392,6 +444,7 @@ class TopicEntry(Gtk.Entry):
         with self.handler_block(self.changeHandler):
             self.set_text( self.parent.parent.window.environment.timeTab.getTopic(self.date, self.period) )
         self.handler_unblock(self.changeHandler)
+
 
 class DateLabel(Gtk.Label):
     """Displays the date in an fancy format. This class is

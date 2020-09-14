@@ -21,16 +21,20 @@ class ClassNotebook(Gtk.Notebook):
         self.set_scrollable( True )
         self.__savelist = []
         self.currentPage = None
+        #self.update_tabs()
+        #print("nb created")
 
     def showHandler(self, wid):
         """When the notebook becomes visible, update all tabs."""
         self.update()
 
-    def update(self):
+    def update_tabs(self):
         """Refreshes the tabs and updates the sequences."""
         # first, remove all
         for tab in self.__tabs:
             self.detach_tab(tab)
+
+        self.__tabs = []
 
         # now add from the time table
         for name in self.parent.environment.timeTab.getClassList():
@@ -41,7 +45,28 @@ class ClassNotebook(Gtk.Notebook):
             self.__tabs.append(page)
             page.update()
 
+    def update(self):
+        self.update_tabs()
         self.show_all()
+
+
+    def switch_to_tab(self, class_name):
+        """show tab with the given class"""
+        i = 0
+        for name in self.parent.environment.timeTab.getClassList():
+            if name == class_name:
+                self.set_current_page(i)
+                self.__tabs[i].update()
+                break
+            i = i + 1
+
+    def get_tab(self, class_name):
+        """return the tab for the given classname"""
+        i = 0
+        for name in self.parent.environment.timeTab.getClassList():
+            if name == class_name:
+                return self.__tabs[i]
+            i = i + 1
 
 
 class SequenceTV(Gtk.ScrolledWindow):
@@ -57,6 +82,8 @@ class SequenceTV(Gtk.ScrolledWindow):
     """
 
     def __init__(self, name, parent):
+        # testing
+
         Gtk.ScrolledWindow.__init__(self )
         self.parent = parent
 
@@ -67,10 +94,10 @@ class SequenceTV(Gtk.ScrolledWindow):
         self.set_border_width(5)
         self.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
 
+        self.sequenceBuf = Gtk.TextBuffer()
         self.nrBuf = Gtk.TextBuffer()
         self.dateBuf = Gtk.TextBuffer()
         self.periodBuf = Gtk.TextBuffer()
-        self.sequenceBuf = Gtk.TextBuffer()
 
         nrLab = Gtk.Label()
         dateLab = Gtk.Label()
@@ -90,10 +117,10 @@ class SequenceTV(Gtk.ScrolledWindow):
         dateLab.set_width_chars(15)
 
         # a textview (displays the buffer)
+        self.sequenceTextView = SequenceEdit(parent=self, buffer=self.sequenceBuf)
         nrTextView = Gtk.TextView(buffer=self.nrBuf)
         dateTextView = Gtk.TextView(buffer=self.dateBuf)
         periodTextView = Gtk.TextView(buffer=self.periodBuf )
-        self.sequenceTextView = Gtk.TextView(buffer=self.sequenceBuf)
 
         # wrap the text, if needed, breaking lines in between words
         nrTextView.set_wrap_mode(Gtk.WrapMode.WORD)
@@ -106,10 +133,19 @@ class SequenceTV(Gtk.ScrolledWindow):
         dateTextView.set_justification(Gtk.Justification.RIGHT)
         periodTextView.set_justification(Gtk.Justification.CENTER)
 
-        #set date/period are not to edit
+        #set date/period are not to edit, have no cursor and
+        # cannot focus. so the cursor jumps to the sequence view
         nrTextView.set_editable(False)
         dateTextView.set_editable(False)
         periodTextView.set_editable(False)
+
+        nrTextView.set_cursor_visible(False)
+        dateTextView.set_cursor_visible(False)
+        periodTextView.set_cursor_visible(False)
+
+        nrTextView.set_can_focus(False)
+        dateTextView.set_can_focus(False)
+        periodTextView.set_can_focus(False)
 
         # the topic should fill the rest of the empty space
         # and the textview should be expanded in the beginning
@@ -132,11 +168,20 @@ class SequenceTV(Gtk.ScrolledWindow):
         grid.attach(self.sequenceTextView, 6, 1, 1, 1)
         self.add(grid)
 
+
         # when the widget is visible, load the sequence and save it, when it becomes
         # invisible
         self.connect("map", self.__loadSequence  )
         self.connect("unmap", self.__saveSequence  )
         self.sequenceList = []
+
+        # for setting the focus on update
+        self.grid = grid
+
+
+
+
+
 
 
     def __loadSequence(self, wid):
@@ -172,6 +217,12 @@ class SequenceTV(Gtk.ScrolledWindow):
         name = self.name
         dates_of_class = self.parent.parent.environment.timeTab.getDatesOfClass(name)
 
+        # set the sequence
+        sl = self.sequenceList
+        sl = [str(t) for t in sl]
+        txt = "\n".join(sl)
+        self.sequenceBuf.set_text(txt)
+
         # set the date-column
         dates = [d for d, p in dates_of_class]
         dates = [config.weekdaysShort[d.isoweekday()] + "  " +
@@ -191,16 +242,80 @@ class SequenceTV(Gtk.ScrolledWindow):
         txt = "\n".join(ns)
         self.nrBuf.set_text(txt)
 
-        # set the sequence
-        sl = self.sequenceList
-        sl = [str(t) for t in sl]
-        txt = "\n".join(sl)
-        self.sequenceBuf.set_text(txt)
+
+        # testing
+        #self.grid.do_set_focus_child(self.sequenceTextView)
+        #self.grid.get_focus_child()
 
         # set focus to the sequence
-        #self.sequenceTextView.place_cursor_onscreen()
+        cursor = self.sequenceBuf.get_iter_at_line(0)
+        self.sequenceBuf.place_cursor(cursor)
 
 
-        #dbglog("update seq " + name)
+class SequenceEdit(Gtk.TextView):
+    def __init__(self, *args, parent, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.parent = parent
+        # for jumping between timetable and sequence view
+        self.connect("key-press-event",self.__on_jump)
+
+    def __on_jump(self, widget, event):
+        """Jumps to the Timetable view
+        """
+        # check the event modifiers (can also use SHIFTMASK, etc)
+        ctrl = (event.state & Gdk.ModifierType.CONTROL_MASK)
+
+        # see if we recognise a keypress
+        if ctrl and event.keyval == Gdk.KEY_j:
+            # to the timetable view
+            self.parent.parent.parent.stack.set_visible_child_name("timetable")
+
+            # get number in sequence
+            buf = self.get_buffer()
+            cursor_mark = buf.get_insert()
+            cursor_iter = buf.get_iter_at_mark(cursor_mark)
+            n = cursor_iter.get_line()
+
+            # get classname
+            name = self.parent.name
+
+            # get date und period
+            dates_of_class = self.parent.parent.parent.environment.timeTab.getDatesOfClass(name)
+
+            date, period = dates_of_class[n]
+
+            print("Number " + str(n))
+            print("Classname " + str(name))
+            print("date " + str(date))
+            print("period " + str(period))
+
+            # switch the timetable view to date
+            week = self.parent.parent.parent.weekWid
+            week.setDate(date)
+
+            # get daygrid for date
+            weekday = date.isoweekday()
+
+            if weekday == 1:
+                day = week.mon
+            if weekday == 2:
+                day = week.tue
+            if weekday == 3:
+                day = week.wed
+            if weekday == 4:
+                day = week.thu
+            if weekday == 5:
+                day = week.fri
+            if weekday == 6:
+                day = week.sat
+
+            day.update()
+
+            # get the topic, select, focus
+            topic = day.get_topic_entry(period)
+            topic.grab_focus()
+            topic.select_region(0, -1)
+
+
 
 

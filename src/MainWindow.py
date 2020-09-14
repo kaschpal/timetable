@@ -48,11 +48,11 @@ class MainWindow(Gtk.ApplicationWindow):
         self.stack.add_titled(self.calendar, "calendar", _("calendar"))
 
         ## the switcher
-        stack_switcher = Gtk.StackSwitcher()
-        stack_switcher.set_stack(self.stack)
-        stack_switcher.props.halign = Gtk.Align.CENTER
+        self.stack_switcher = Gtk.StackSwitcher()
+        self.stack_switcher.set_stack(self.stack)
+        self.stack_switcher.props.halign = Gtk.Align.CENTER
         #vbox.set_center_widget(stack_switcher)
-        vbox.pack_start(stack_switcher, True, True, 0)
+        vbox.pack_start(self.stack_switcher, True, True, 0)
         vbox.pack_end(self.stack, False, False, 0)
 
         self.__header()

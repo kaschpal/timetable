@@ -409,6 +409,32 @@ class TimeTableStore():
         # else
         return ""
 
+    def get_position_in_sequence(self, date, period):
+        """Returns the position of the topic in the sequence.
+        This is used to jump from a topic in the timetable view into the sequence view.
+        The first topic numbered as 0.
+        """
+        classname = self.getClassName(date, period)
+
+        # get the dates of the class
+        dateslist = self.getDatesOfClass(classname, GRAB_DOTS=True)
+
+        # get the sequene of the class
+        seqlist = self.getSequence(classname)
+
+        # zip cuts off, when one list is longer
+        combi = zip( dateslist, seqlist)
+
+        i = 0
+        # search for the date and period
+        for entry in combi:
+            d, p = entry[0]  # date, period
+            topic = entry[1]
+
+            if d == date and p == period:
+                return i
+            i = i + 1
+
 
 
     def changeTopic(self, date, period, topic):
