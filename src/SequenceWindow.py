@@ -117,7 +117,7 @@ class SequenceTV(Gtk.ScrolledWindow):
         dateLab.set_width_chars(15)
 
         # a textview (displays the buffer)
-        self.sequenceTextView = Gtk.TextView(buffer=self.sequenceBuf)
+        self.sequenceTextView = SequenceEdit(parent=self, buffer=self.sequenceBuf)
         nrTextView = Gtk.TextView(buffer=self.nrBuf)
         dateTextView = Gtk.TextView(buffer=self.dateBuf)
         periodTextView = Gtk.TextView(buffer=self.periodBuf )
@@ -177,6 +177,10 @@ class SequenceTV(Gtk.ScrolledWindow):
 
         # for setting the focus on update
         self.grid = grid
+
+
+
+
 
 
 
@@ -246,6 +250,72 @@ class SequenceTV(Gtk.ScrolledWindow):
         # set focus to the sequence
         cursor = self.sequenceBuf.get_iter_at_line(0)
         self.sequenceBuf.place_cursor(cursor)
+
+
+class SequenceEdit(Gtk.TextView):
+    def __init__(self, *args, parent, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.parent = parent
+        # for jumping between timetable and sequence view
+        self.connect("key-press-event",self.__on_jump)
+
+    def __on_jump(self, widget, event):
+        """Jumps to the Timetable view
+        """
+        # check the event modifiers (can also use SHIFTMASK, etc)
+        ctrl = (event.state & Gdk.ModifierType.CONTROL_MASK)
+
+        # see if we recognise a keypress
+        if ctrl and event.keyval == Gdk.KEY_j:
+            # to the timetable view
+            self.parent.parent.parent.stack.set_visible_child_name("timetable")
+
+            # get number in sequence
+            buf = self.get_buffer()
+            cursor_mark = buf.get_insert()
+            cursor_iter = buf.get_iter_at_mark(cursor_mark)
+            n = cursor_iter.get_line()
+
+            # get classname
+            name = self.parent.name
+
+            # get date und period
+            dates_of_class = self.parent.parent.parent.environment.timeTab.getDatesOfClass(name)
+
+            date, period = dates_of_class[n]
+
+            print("Number " + str(n))
+            print("Classname " + str(name))
+            print("date " + str(date))
+            print("period " + str(period))
+
+            # switch the timetable view to date
+            week = self.parent.parent.parent.weekWid
+            week.setDate(date)
+
+            # get daygrid for date
+            weekday = date.isoweekday()
+
+            if weekday == 1:
+                day = week.mon
+            if weekday == 2:
+                day = week.tue
+            if weekday == 3:
+                day = week.wed
+            if weekday == 4:
+                day = week.thu
+            if weekday == 5:
+                day = week.fri
+            if weekday == 6:
+                day = week.sat
+
+            day.update()
+
+            # get the topic, select, focus
+            topic = day.get_topic_entry(period)
+            topic.grab_focus()
+            topic.select_region(0, -1)
+
 
 
 

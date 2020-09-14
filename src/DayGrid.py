@@ -133,6 +133,12 @@ class DayGrid(Gtk.Grid):
         self.parent.update()
 
 
+    def get_topic_entry(self, period):
+        """Returns the topic entry by the period. This is for jumping."""
+        for widget in self.__updateList:
+            if type(widget) is TopicEntry: # only relevant ones
+                if widget.period == period:
+                    return widget
 
 
     def update(self):
@@ -402,21 +408,22 @@ class TopicEntry(Gtk.Entry):
             tab = nb.get_tab(class_name)
             tv = tab.sequenceTextView
             tv.grab_focus()
-            #print("focus = " + str(tv.has_focus()))
-            #print("tv = " + str(tv))
 
             # set postion in textfield
-            cursor = tab.sequenceBuf.get_iter_at_line(position)
+            buf = tab.sequenceBuf
+            cursor = buf.get_iter_at_line(position)
             res = tv.scroll_to_iter(cursor, 0.0, True, 0.5, 0.5)
-            tab.sequenceBuf.place_cursor(cursor)
+            buf.place_cursor(cursor)
 
             # select line
-            line_begin = tab.sequenceBuf.get_iter_at_line(position) # again, since forward_to_line does not return a copy
+            line_begin = buf.get_iter_at_line(position) # again, since forward_to_line does not return a copy
             cursor.forward_to_line_end()
-            tab.sequenceBuf.select_range(line_begin, cursor)
+            buf.select_range(line_begin, cursor)
 
-            print(res)
-            #
+
+            # scroll
+            tv.scroll_mark_onscreen(buf.get_insert())
+
 
 
     def update(self):
@@ -437,6 +444,7 @@ class TopicEntry(Gtk.Entry):
         with self.handler_block(self.changeHandler):
             self.set_text( self.parent.parent.window.environment.timeTab.getTopic(self.date, self.period) )
         self.handler_unblock(self.changeHandler)
+
 
 class DateLabel(Gtk.Label):
     """Displays the date in an fancy format. This class is
