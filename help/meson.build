@@ -6,7 +6,8 @@ gnome.yelp(meson.project_name(),
     'create_classes.page',
     'memos.page',
     'exceptions.page',
-    'day-off.page'
+    'day-off.page',
+    'jumping.page'
   ],
   media: ['pics/logo.svg',
   	'pics/screenshot-tt.png',

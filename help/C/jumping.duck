@@ -1,0 +1,7 @@
+= Jumping between timetable and sequence view
+  [topic]
+@link[guide >index]
+
+With the keyboard shortcut CRTL-J you can jump between the timetable and sequence view
+for the topic under the cursor. Note that in the timetable view the cursor has to be inside a
+topic entry for this feature (not in the class entry).

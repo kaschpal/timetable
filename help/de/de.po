@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timetable\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-15 10:13+0200\n"
+"POT-Creation-Date: 2020-09-17 21:14+0200\n"
 "PO-Revision-Date: 2019-11-04 13:12+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -211,25 +211,18 @@ msgstr "Die Stunden in der 7a und 10d wurden getauscht."
 msgid "Timetable"
 msgstr "Stundenplan"
 
-#. (itstool) path: page/p
-#: ../C/index.page:4
-msgid ""
-"<em>New in 1.2</em>: You can jump between the timetable und the sequence "
-"view for a topic with <em>CTRL-J</em>."
-msgstr ""
-
 #. (itstool) path: p/media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: ../C/index.page:5
+#: ../C/index.page:4
 msgctxt "_"
 msgid "external ref='pics/logo.svg' md5='817d2e3ed0c230ae6dc73bbf142d06a5'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: ../C/index.page:6
+#: ../C/index.page:5
 msgid "Timetable imitates a classic calendar/planner for teachers."
 msgstr "Stundenplan bildet einen klassichen Lehrerkalender bzw. -planer nach."
 
@@ -238,14 +231,14 @@ msgstr "Stundenplan bildet einen klassichen Lehrerkalender bzw. -planer nach."
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: ../C/index.page:7
+#: ../C/index.page:6
 msgctxt "_"
 msgid ""
 "external ref='pics/screenshot-tt.png' md5='a3d28c7712033d9d866fa9641a570b12'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: ../C/index.page:8
+#: ../C/index.page:7
 msgid ""
 "The topic of the lesson is determined by the curricular sequence. If you "
 "shift the lesson, e.g. by adding a substitute lesson, the topic is moved "
@@ -259,14 +252,14 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: ../C/index.page:10
+#: ../C/index.page:9
 msgctxt "_"
 msgid ""
 "external ref='pics/screenshot-seq.png' md5='f2d3dd35d71951d9e50c751c2d7f9032'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: ../C/index.page:11
+#: ../C/index.page:10
 msgid ""
 "In the sequence view, you can edit the topic and the chronological order. "
 "Every line is one topic. The list of topics is an ordinary text field, which "
@@ -283,6 +276,25 @@ msgstr ""
 "Ansicht erzeugt. Es gibt also keine Liste-von-Klassen in irgendwelchen "
 "Einstellungsdialogen. Eine Klasse, die <em>ausschließlich</em> als Ausnahme "
 "(Punkt-Eintrag) existiert, taucht in der Sequenz-Ansicht nicht auf."
+
+#. (itstool) path: page/title
+#: ../C/jumping.page:6
+msgid "Jumping between timetable and sequence view"
+msgstr "Zwischen dem Stundenplan und der Sequenz springen"
+
+#. (itstool) path: page/p
+#: ../C/jumping.page:7
+msgid ""
+"With the keyboard shortcut CRTL-J you can jump between the timetable and "
+"sequence view for the topic under the cursor. Note that in the timetable "
+"view the cursor has to be inside a topic entry for this feature (not in the "
+"class entry)."
+msgstr ""
+"Für das Stundenthema, das unter dem Cursor steht, kann mit dem Tastekürzel "
+"STRG-J zwischen dem Stundenplan und der Sequenz, hin- und her gesprungen "
+"werden. Man beachte, dass im Stundenplan der Cursor auch in einem Themenfeld "
+"stehen muss (nicht in einem Klassenfeld)."
+
 
 #. (itstool) path: page/title
 #: ../C/memos.page:6
