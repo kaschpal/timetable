@@ -64,6 +64,42 @@ class MainWindow(Gtk.ApplicationWindow):
         self.stack.connect("notify::visible-child", self.__stackSwitched )
         self.connect("destroy", self.quit)
 
+        # shortcuts
+        self.connect("key-press-event",self.__process_shortcuts)
+
+
+    def __process_shortcuts(self, widget, event):
+        # check the event modifiers (can also use SHIFTMASK, etc)
+        ctrl = (event.state & Gdk.ModifierType.CONTROL_MASK)
+
+        # ctrl - w     or     ctrl - q : QUIT
+        if ctrl and (event.keyval == Gdk.KEY_w or event.keyval == Gdk.KEY_q):
+            self.quit(self)
+            return
+        elif event.keyval == Gdk.KEY_F1:
+            self.__helpClicked(None)
+            return
+        # Keyboard Shortcuts
+        elif event.keyval == Gdk.KEY_question:
+            self.__shortcutsClicked(None)
+            return
+        # Main Menu
+        elif event.keyval == Gdk.KEY_F10:
+            self.main_menu_button.activate()
+            return
+        # week +
+        elif event.keyval == Gdk.KEY_l:
+            self.__nextWeekclicked(None)
+            return
+        # week -
+        elif event.keyval == Gdk.KEY_h:
+            self.__prevWeekclicked(None)
+            return
+        # week current
+        elif event.keyval == Gdk.KEY_k:
+            self.__currentWeekclicked(None)
+            return
+
 
     def __stackSwitched(self, wid, gparamstring):
         """Updates the weekwid, if the view is changed"""
@@ -119,15 +155,17 @@ class MainWindow(Gtk.ApplicationWindow):
         menu.insert_item( 4, Gio.MenuItem.new( _("quit without saving"), "win.quit_without_saving" ) )
         menu.insert_item( 5, Gio.MenuItem.new( _("About Timetable"), "win.about" ) )
 
-
         #menu button
         button = Gtk.MenuButton.new()
+        self.main_menu_button = button
         popover = Gtk.Popover.new_from_model(button, menu)
         button.set_popover(popover)
         icon = Gio.ThemedIcon(name="open-menu-symbolic")
         image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
         button.add(image)
         self.hb.pack_end(button)
+
+        # for calling by shortcut F10
 
         # settings button
         button = SettingsButton(window=self)
@@ -140,6 +178,15 @@ class MainWindow(Gtk.ApplicationWindow):
         button.add(image)
         button.connect("clicked", self.__helpClicked)
         self.hb.pack_end(button)
+
+        # shortcuts-button
+        button = Gtk.Button()
+        icon = Gio.ThemedIcon(name="preferences-desktop-keyboard-symbolic")
+        image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
+        button.add(image)
+        button.connect("clicked", self.__shortcutsClicked)
+        self.hb.pack_end(button)
+
 
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         Gtk.StyleContext.add_class(box.get_style_context(), "linked")
@@ -238,6 +285,14 @@ class MainWindow(Gtk.ApplicationWindow):
             Gtk.show_uri(None, "help:timetable", Gdk.CURRENT_TIME)
         except GLib.Error:
             dbglog("Help handler not available.")
+
+    def __shortcutsClicked(self, button):
+        """Display Keyboad Shortcuts"""
+        builder = Gtk.Builder()
+        builder.add_from_resource('/io/github/kaschpal/timetable/shortcuts.ui')
+
+        swin = builder.get_object("shortcuts")
+        swin.show_all()
 
     def __prevWeekclicked(self, button):
         """When clicked on previous-week-button, shift for one week in the
@@ -356,6 +411,9 @@ class MainWindow(Gtk.ApplicationWindow):
             filename = None
             pass
         dialog.destroy()
+
+        # switch to tt view
+        self.stack.set_visible_child_name("timetable")
 
         #dbglog(str(filename))
 
@@ -550,6 +608,7 @@ class Environment():
 
         # set new filename in statefile
         self.currentFileName = filename
+
 
     def saveState(self):
         """There has been a statefile, which held the current filname. Now this

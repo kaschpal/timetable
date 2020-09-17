@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timetable\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-28 13:13+0200\n"
+"POT-Creation-Date: 2020-09-15 10:13+0200\n"
 "PO-Revision-Date: 2019-11-04 13:12+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -33,13 +33,13 @@ msgid ""
 "now on. To end repetition, you delete the entry (=string \"\") at the first "
 "date where it should appear no more."
 msgstr ""
-"Die Klassen werden in dem kleineren Textfeld eingetragen, welches sich im Tagesraster befindet. "
-"Im größeren Textfeld trägt man das Thema der Stunde ein. Der eingetragene Klassename "
-"wird von jetzt an wöchentlich wiederholt. Der Stundenplan muss also nur für die erste Schulwoche "
-"übertragen werden. "
-"Wird der Eintrag des Klassennames später geändert, wiederholt sich von da an die Änderung jede Woche. "
-"Soll der Eintrag nicht mehr wiederholt werden, wird er an der Stelle gelöscht (=String \"\"), "
-"wo er nicht mehr auftauchen soll. "
+"Die Klassen werden in dem kleineren Textfeld eingetragen, welches sich im "
+"Tagesraster befindet. Im größeren Textfeld trägt man das Thema der Stunde "
+"ein. Der eingetragene Klassename wird von jetzt an wöchentlich wiederholt. "
+"Der Stundenplan muss also nur für die erste Schulwoche übertragen werden. "
+"Wird der Eintrag des Klassennames später geändert, wiederholt sich von da an "
+"die Änderung jede Woche. Soll der Eintrag nicht mehr wiederholt werden, wird "
+"er an der Stelle gelöscht (=String \"\"), wo er nicht mehr auftauchen soll. "
 
 #. (itstool) path: p/media
 #. This is a reference to an external file such as an image or video. When
@@ -60,11 +60,11 @@ msgid ""
 "different cell). This has technical reasons due to the dynamic design of the "
 "application."
 msgstr ""
-"Man beachte, dass jede Änderung am Klasseneintrag mit der Eingabtaste (=Enter) "
-"bestätigt werden muss. Alternativ wird der Eintrag auch gespeichert, wenn man aus "
-"der Zelle herausspringt (Tab oder Mausklick irgendwo anders hin). "
-"Das liegt am dynamischen Design der Anwendung und ist nicht wirklich anders möglich. "
-
+"Man beachte, dass jede Änderung am Klasseneintrag mit der Eingabtaste "
+"(=Enter) bestätigt werden muss. Alternativ wird der Eintrag auch "
+"gespeichert, wenn man aus der Zelle herausspringt (Tab oder Mausklick "
+"irgendwo anders hin). Das liegt am dynamischen Design der Anwendung und ist "
+"nicht wirklich anders möglich. "
 
 #. (itstool) path: page/p
 #: ../C/create_classes.page:14
@@ -72,9 +72,8 @@ msgid ""
 "The first time a class is entered, the entry is shown in red colour. This is "
 "for quickly finding it again."
 msgstr ""
-"Wo die Klasse eingetragen wurde, erscheint "
-"der Eintrag in rot. So kann man diese Stelle später wieder leichter finden."
-
+"Wo die Klasse eingetragen wurde, erscheint der Eintrag in rot. So kann man "
+"diese Stelle später wieder leichter finden."
 
 #. (itstool) path: p/media
 #. This is a reference to an external file such as an image or video. When
@@ -94,9 +93,10 @@ msgid ""
 "The classes appear in the sequence view at once. Note that \"x\" does not "
 "because it has a leading dot which means, it is not repeated."
 msgstr ""
-"Die Klassen tauchen in der Sequenz-Ansicht sofort auf. Man beachte, "
-"dass das für \"x\" nicht zutrifft. Der Punkt am Anfang bedeutet, dass dieser Eintrag "
-"nur einmal vorkommen soll. Da es ihn deshalb nur einmal gibt, wird keine Sequenz angelegt."
+"Die Klassen tauchen in der Sequenz-Ansicht sofort auf. Man beachte, dass das "
+"für \"x\" nicht zutrifft. Der Punkt am Anfang bedeutet, dass dieser Eintrag "
+"nur einmal vorkommen soll. Da es ihn deshalb nur einmal gibt, wird keine "
+"Sequenz angelegt."
 
 #. (itstool) path: page/title
 #: ../C/day-off.page:6
@@ -110,9 +110,9 @@ msgid ""
 "you can deactivate all lessons for this date. Simply uncheck the checkbox "
 "right of the date (at the top)."
 msgstr ""
-"Im Falle von Ferien, Feiertagen, Krankeit oder Fortbildungen, können alle Stunden für "
-"diesen Tag ausgeschaltet werden. Dazu kann man den Tag mit Hilfe der Checkbox "
-"neben dem Datum ausschalten."
+"Im Falle von Ferien, Feiertagen, Krankeit oder Fortbildungen, können alle "
+"Stunden für diesen Tag ausgeschaltet werden. Dazu kann man den Tag mit Hilfe "
+"der Checkbox neben dem Datum ausschalten."
 
 #. (itstool) path: p/media
 #. This is a reference to an external file such as an image or video. When
@@ -143,16 +143,18 @@ msgid ""
 "is \".9c\". Dot enties are used for shifting and substitute lessons. They "
 "are not repeated and do not affect repetition of the original entry."
 msgstr ""
-"Wird dem Klasseneintrag ein Punkt vorangestellt, so ist dieser Eintrag eine Ausnahme. "
-"Ein Beispiel für einen Ausnahmeeintrag wäre z.B. \".9c\". "
-"Diese Punkt-Einträge werden zum Verschieben von Stunden oder Vertretungsstunden "
-"benutzt. Sie wiederholen sich nicht und beenden auch nicht die Wiederholung des Eintrages, "
-"der normalerweise an diesem Ort stehen würde."
+"Wird dem Klasseneintrag ein Punkt vorangestellt, so ist dieser Eintrag eine "
+"Ausnahme. Ein Beispiel für einen Ausnahmeeintrag wäre z.B. \".9c\". Diese "
+"Punkt-Einträge werden zum Verschieben von Stunden oder Vertretungsstunden "
+"benutzt. Sie wiederholen sich nicht und beenden auch nicht die Wiederholung "
+"des Eintrages, der normalerweise an diesem Ort stehen würde."
 
 #. (itstool) path: page/p
 #: ../C/exceptions.page:9
 msgid "If a lesson is simply cancelled, use only a dot (\".\") as class entry."
-msgstr "Fällt eine Stunde einfach aus, verwendet man nur einen Punkt (\".\") als Klasseneintrag."
+msgstr ""
+"Fällt eine Stunde einfach aus, verwendet man nur einen Punkt (\".\") als "
+"Klasseneintrag."
 
 #. (itstool) path: page/p
 #: ../C/exceptions.page:10
@@ -209,18 +211,25 @@ msgstr "Die Stunden in der 7a und 10d wurden getauscht."
 msgid "Timetable"
 msgstr "Stundenplan"
 
+#. (itstool) path: page/p
+#: ../C/index.page:4
+msgid ""
+"<em>New in 1.2</em>: You can jump between the timetable und the sequence "
+"view for a topic with <em>CTRL-J</em>."
+msgstr ""
+
 #. (itstool) path: p/media
 #. This is a reference to an external file such as an image or video. When
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: ../C/index.page:4
+#: ../C/index.page:5
 msgctxt "_"
 msgid "external ref='pics/logo.svg' md5='817d2e3ed0c230ae6dc73bbf142d06a5'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: ../C/index.page:5
+#: ../C/index.page:6
 msgid "Timetable imitates a classic calendar/planner for teachers."
 msgstr "Stundenplan bildet einen klassichen Lehrerkalender bzw. -planer nach."
 
@@ -229,14 +238,14 @@ msgstr "Stundenplan bildet einen klassichen Lehrerkalender bzw. -planer nach."
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: ../C/index.page:6
+#: ../C/index.page:7
 msgctxt "_"
 msgid ""
 "external ref='pics/screenshot-tt.png' md5='a3d28c7712033d9d866fa9641a570b12'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: ../C/index.page:7
+#: ../C/index.page:8
 msgid ""
 "The topic of the lesson is determined by the curricular sequence. If you "
 "shift the lesson, e.g. by adding a substitute lesson, the topic is moved "
@@ -250,14 +259,14 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: ../C/index.page:9
+#: ../C/index.page:10
 msgctxt "_"
 msgid ""
 "external ref='pics/screenshot-seq.png' md5='f2d3dd35d71951d9e50c751c2d7f9032'"
 msgstr ""
 
 #. (itstool) path: page/p
-#: ../C/index.page:10
+#: ../C/index.page:11
 msgid ""
 "In the sequence view, you can edit the topic and the chronological order. "
 "Every line is one topic. The list of topics is an ordinary text field, which "
@@ -267,13 +276,13 @@ msgid ""
 "as temperary entry in the timetable view (dot entry) will not show up in the "
 "sequence view."
 msgstr ""
-"In der Sequenz-Ansicht können die Stundenthemen und die Reihenfolge bearbeitet werden. "
-"Jede Zeile ist ein Stundenthema. Diese Liste ist ein normales Textfeld. Man kann also "
-"in oder aus einer Textdatei einfügen bzw. kopieren. "
-"Die Klassen der Sequenzen werden dynamisch aus der Stundenplan-Ansicht erzeugt. "
-"Es gibt also keine Liste-von-Klassen in irgendwelchen Einstellungsdialogen. "
-"Eine Klasse, die <em>ausschließlich</em> als Ausnahme (Punkt-Eintrag) existiert, taucht "
-"in der Sequenz-Ansicht nicht auf."
+"In der Sequenz-Ansicht können die Stundenthemen und die Reihenfolge "
+"bearbeitet werden. Jede Zeile ist ein Stundenthema. Diese Liste ist ein "
+"normales Textfeld. Man kann also in oder aus einer Textdatei einfügen bzw. "
+"kopieren. Die Klassen der Sequenzen werden dynamisch aus der Stundenplan-"
+"Ansicht erzeugt. Es gibt also keine Liste-von-Klassen in irgendwelchen "
+"Einstellungsdialogen. Eine Klasse, die <em>ausschließlich</em> als Ausnahme "
+"(Punkt-Eintrag) existiert, taucht in der Sequenz-Ansicht nicht auf."
 
 #. (itstool) path: page/title
 #: ../C/memos.page:6
@@ -316,8 +325,9 @@ msgid ""
 "If you have to add a lot of appointments at once, the calendar view is "
 "useful. Here you can also edit the memos, which appear in the timetable view."
 msgstr ""
-"Sollen viele Termine auf einmal eingetragen werden, ist die Kalender-Ansicht praktisch. "
-"Die dort eingetragenen Erinnerungen tauchen dann in der Stundenplan-Ansicht auf. "
+"Sollen viele Termine auf einmal eingetragen werden, ist die Kalender-Ansicht "
+"praktisch. Die dort eingetragenen Erinnerungen tauchen dann in der "
+"Stundenplan-Ansicht auf. "
 
 #. (itstool) path: p/media
 #. This is a reference to an external file such as an image or video. When

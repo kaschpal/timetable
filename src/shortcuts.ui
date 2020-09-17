@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkShortcutsWindow" id="shortcuts">
+    <property name="modal">True</property>
+    <child>
+      <object class="GtkShortcutsSection" id="section1">
+        <property name="visible">True</property>
+        <property name="section-name">shortcuts</property>
+        <property name="max-height">10</property>
+        <child>
+          <object class="GtkShortcutsGroup" id="s1lbl">
+            <property name="visible">True</property>
+            <property name="title" translatable="yes" context="shortcut window">Navigation</property>
+            <child>
+              <object class="GtkShortcutsShortcut" id="s1-1">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">Jump with topic between timetable and sequence</property>
+                <property name="accelerator">&lt;Primary&gt;j</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="s1-2">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">one week forward</property>
+                <property name="accelerator">&lt;Primary&gt;l</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="s1-3">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">one week back</property>
+                <property name="accelerator">&lt;Primary&gt;h</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="s1-4">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">current week</property>
+                <property name="accelerator">&lt;Primary&gt;k</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup" id="general">
+            <property name="visible">True</property>
+            <property name="title" translatable="yes" context="window">General</property>
+            <child>
+              <object class="GtkShortcutsShortcut" id="s2-1">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">Main menu</property>
+                <property name="accelerator">F10</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="s2-2">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">Open help browser</property>
+                <property name="accelerator">F1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="s2-3">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">Keyboard shortcuts</property>
+                <property name="accelerator">&lt;Primary&gt;question</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="s2-4">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">Quit application</property>
+                <property name="accelerator">&lt;Primary&gt;q</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="s2-5">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">Quit application</property>
+                <property name="accelerator">&lt;Primary&gt;w</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+      </object>
+    </child>
+  </object>
+</interface>
