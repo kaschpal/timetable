@@ -79,24 +79,24 @@ class MainWindow(Gtk.ApplicationWindow):
         elif event.keyval == Gdk.KEY_F1:
             self.__helpClicked(None)
             return
-        # Keyboard Shortcuts
-        elif event.keyval == Gdk.KEY_question:
-            self.__shortcutsClicked(None)
-            return
         # Main Menu
         elif event.keyval == Gdk.KEY_F10:
             self.main_menu_button.activate()
             return
+        # Keyboard Shortcuts
+        elif ctrl and event.keyval == Gdk.KEY_question:
+            self.__shortcutsClicked(None)
+            return
         # week +
-        elif event.keyval == Gdk.KEY_l:
+        elif ctrl and event.keyval == Gdk.KEY_l:
             self.__nextWeekclicked(None)
             return
         # week -
-        elif event.keyval == Gdk.KEY_h:
+        elif ctrl and event.keyval == Gdk.KEY_h:
             self.__prevWeekclicked(None)
             return
         # week current
-        elif event.keyval == Gdk.KEY_k:
+        elif ctrl and event.keyval == Gdk.KEY_k:
             self.__currentWeekclicked(None)
             return
 
