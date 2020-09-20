@@ -174,3 +174,50 @@ msgstr "h"
 #: src/SequenceWindow.py:86
 msgid "topic"
 msgstr "Thema"
+
+
+
+
+#. (itstool) path: object/property
+#: ../src/ui/shortcuts.ui:17
+msgid "Jump with topic between timetable and sequence"
+msgstr "Zwischen Stundenplan und Sequenz springen"
+
+
+#. (itstool) path: object/property
+#: ../src/ui/shortcuts.ui:24
+msgid "one week forward"
+msgstr "Eine Woche vor"
+
+#. (itstool) path: object/property
+#: ../src/ui/shortcuts.ui:31
+msgid "one week back"
+msgstr "Eine Woche zurück"
+
+#. (itstool) path: object/property
+#: ../src/ui/shortcuts.ui:38
+msgid "current week"
+msgstr "Aktuelle Woche"
+
+
+#. (itstool) path: object/property
+#: ../src/ui/shortcuts.ui:47
+msgid "General"
+msgstr "Allgemeines"
+
+#. (itstool) path: object/property
+#: ../src/ui/shortcuts.ui:51
+msgid "Main menu"
+msgstr "Hauptmenü"
+
+#. (itstool) path: object/property
+#: ../src/ui/shortcuts.ui:58
+msgid "Open help browser"
+msgstr "Hilfe öffnen"
+
+#. (itstool) path: object/property
+#: ../src/ui/shortcuts.ui:72
+#: ../src/ui/shortcuts.ui:79
+msgid "Quit application"
+msgstr "Anwendung schließen"
+

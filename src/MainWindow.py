@@ -9,8 +9,10 @@ from .WeekGrid import WeekGrid
 from .SequenceWindow import ClassNotebook
 from .CalendarWindow import  Calendar
 from .TimeTableStore import TimeTableStore
+from .utils import ui_translate
 from gi.repository import Gtk, Gio, GLib, Gdk
 gi.require_version('Gtk', '3.0')
+
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -289,9 +291,11 @@ class MainWindow(Gtk.ApplicationWindow):
     def __shortcutsClicked(self, button):
         """Display Keyboad Shortcuts"""
         builder = Gtk.Builder()
-        builder.add_from_resource('/io/github/kaschpal/timetable/shortcuts.ui')
+        builder.add_from_resource('/io/github/kaschpal/timetable/ui/shortcuts.ui')
 
         swin = builder.get_object("shortcuts")
+        ui_translate(builder)     # necessary for .ui files, see utils.py
+
         swin.show_all()
 
     def __prevWeekclicked(self, button):

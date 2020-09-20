@@ -35,6 +35,7 @@ timetable_sources = [
   'SequenceWindow.py',
   'TimeTableStore.py',
   'WeekGrid.py',
+  'utils.py'
 ]
 
 install_data(timetable_sources, install_dir: moduledir)

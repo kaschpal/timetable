@@ -9,3 +9,4 @@ src/CalendarWindow.py
 src/SequenceWindow.py
 src/TimeTableStore.py
 src/WeekGrid.py
+src/ui/shortcuts.ui
