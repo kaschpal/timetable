@@ -221,3 +221,5 @@ msgstr "Hilfe öffnen"
 msgid "Quit application"
 msgstr "Anwendung schließen"
 
+msgid "Keyboard shortcuts"
+msgstr "Tastenkombinationen"
