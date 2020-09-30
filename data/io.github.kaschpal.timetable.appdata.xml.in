@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>io.github.kaschpal.timetable</id>
   <name>Timetable</name>
-  <summary>A calendar/planner for teachers and maybe stundents</summary>
+  <summary>A calendar/planner for teachers and maybe students</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <content_rating type="oars-1.0" />
