@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: timetable\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-04 13:12+0100\n"
-"PO-Revision-Date: 2020-07-26 13:00+0100\n"
+"PO-Revision-Date: 2020-09-30 13:00+0100\n"
 "Last-Translator: Albano_battistella <Albano_battistella@hotmail.com>\n"
 "Language-Team: IT <LL@li.org>\n"
 "Language: \n"
@@ -147,7 +147,7 @@ msgstr "periodi da mostrare"
 #. switch for "show saturday"
 #: src/MainWindow.py:405
 msgid "show saturday"
-msgstr "Mstra sabato"
+msgstr "Mostra sabato"
 
 #. switch for "autosave on quit"
 #: src/MainWindow.py:415
@@ -165,7 +165,7 @@ msgstr "#"
 
 #: src/SequenceWindow.py:84
 msgid "date"
-msgstr "Data"
+msgstr "data"
 
 #: src/SequenceWindow.py:85
 msgid "h"
