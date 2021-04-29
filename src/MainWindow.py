@@ -103,7 +103,7 @@ class MainWindow(Gtk.ApplicationWindow):
             return
         # save
         elif ctrl and event.keyval == Gdk.KEY_s:
-            self.__saveClicked(None)
+            self.__saveClicked(None, None)
             return
 
 
@@ -332,7 +332,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         self.environment.saveCurrentFile()
         self.environment.saveState()
-        self.hb.props.title = (_("Timetable") + ": " + filename)
+        self.hb.props.title = (_("Timetable") + ": " + self.environment.currentFileName)
 
     def __chooseFilename(self):
         """Creates and displays an diaglog, which ask for a filename."""
