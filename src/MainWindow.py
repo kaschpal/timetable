@@ -101,6 +101,10 @@ class MainWindow(Gtk.ApplicationWindow):
         elif ctrl and event.keyval == Gdk.KEY_k:
             self.__currentWeekclicked(None)
             return
+        # save
+        elif ctrl and event.keyval == Gdk.KEY_s:
+            self.__saveClicked(None)
+            return
 
 
     def __stackSwitched(self, wid, gparamstring):
@@ -316,13 +320,16 @@ class MainWindow(Gtk.ApplicationWindow):
         If no file is opened yet (new calendar), the method
         creates a dialog, which askes for a filename.
         """
+        dbglog("save")
+
         # not yet saved, no filename selected
         if self.environment.currentFileName == None:
             filename = self.__chooseFilename()
             if filename == None:
                 return
+            else:
+                self.environment.currentFileName = filename
 
-        self.environment.currentFileName = filename
         self.environment.saveCurrentFile()
         self.environment.saveState()
         self.hb.props.title = (_("Timetable") + ": " + filename)

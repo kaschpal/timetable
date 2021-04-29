@@ -80,6 +80,13 @@
                 <property name="accelerator">&lt;Primary&gt;w</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="s2-6">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">Save</property>
+                <property name="accelerator">&lt;Primary&gt;s</property>
+              </object>
+            </child>
           </object>
         </child>
 

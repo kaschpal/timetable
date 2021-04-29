@@ -223,3 +223,6 @@ msgstr "Anwendung schließen"
 
 msgid "Keyboard shortcuts"
 msgstr "Tastenkombinationen"
+
+msgid "Save"
+msgstr "Speichern"
