@@ -23,8 +23,7 @@
         "*.a"
     ],
     "modules": [
-    	"python3-python-dateutil.json",
-    	"python3-mallard-ducktype.json",
+    	"python3-modules.json",
         {
             "name": "timetable",
             "builddir": true,
