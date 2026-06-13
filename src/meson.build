@@ -1,5 +1,5 @@
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
-modulair = join_paths(pkgdatadir, 'timetable')
+moduledir = join_paths(pkgdatadir, 'timetable')
 gnome = import('gnome')
 
 # GTK4 dependency
@@ -42,3 +42,4 @@ timetable_sources = [
 ]
 
 install_data(timetable_sources, install_dir: moduledir)
+
