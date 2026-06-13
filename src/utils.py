@@ -1,5 +1,5 @@
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gdk
 
 def ui_translate(ui):
@@ -9,4 +9,3 @@ def ui_translate(ui):
     for wid in wids:
         if (type(wid) == Gtk.ShortcutsShortcut) or (type(wid) == Gtk.ShortcutsGroup):
             wid.props.title = _(wid.props.title)
-

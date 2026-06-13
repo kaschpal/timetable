@@ -3,7 +3,7 @@
 
 import gi
 import sys
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk, Gio
 from .MainWindow import MainWindow
 from .config import dbglog
@@ -31,10 +31,8 @@ class Uplan(Gtk.Application):
         if not self.window:
             self.window = MainWindow(application=self)
         self.window.present()
-        self.window.show_all()
 
     def on_quit(self, action, param):
-        window.quit()
         self.quit()
 
 
@@ -56,6 +54,3 @@ def main(version):
 
 if __name__ == "__main__":
     main(0)
-
-
-

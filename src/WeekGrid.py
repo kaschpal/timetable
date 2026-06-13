@@ -1,5 +1,5 @@
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 import datetime
 from . import config
@@ -31,9 +31,9 @@ class WeekGrid(Gtk.Grid):
 
         self.widList = [self.mon, self.tue, self.wed, self.thu, self.fri, self.sat]
 
-        vsep1 = Gtk.VSeparator()
-        vsep2 = Gtk.VSeparator()
-        hsep = Gtk.HSeparator()
+        vsep1 = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+        vsep2 = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+        hsep = Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL)
 
         self.attach(self.mon, 0, 0, 1, 1)
         self.attach(self.thu, 0, 2, 1, 1)
@@ -80,32 +80,4 @@ class WeekGrid(Gtk.Grid):
 
         # should we show the saturday?
         if self.window.environment.setting_show_saturday() == True:
-            self.sat.show()
-        else:
-            self.sat.hide()
-        dbglog("week update")
-
-
-    def setDate(self, date):
-        """Sets the current date of the week to "date" and calls update(),
-        so that this week is displayed.
-        """
-        self.date = date
-        self.mondayDate = date - datetime.timedelta(days=date.weekday())
-        self.update()
-
-
-    def setToday(self):
-        """Just calls setDate on today, but switches to the next week, if today is a sunday
-        or (not displayed) a saturday.
-        """
-        today = datetime.date.today()
-
-        if today.isoweekday() == 7: # sunday
-            self.setDate(today + datetime.timedelta(days=1))
-        # saturday and not displayed
-        elif today.isoweekday() == 6 and self.window.environment.setting_show_saturday() == False:
-            self.setDate(today + datetime.timedelta(days=2))
-        else:
-            self.setDate(today)
-            
+            self.sat.set_visible(True)
