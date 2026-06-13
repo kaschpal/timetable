@@ -1,4 +1,5 @@
 import gi
+gi.require_version('Gtk', '4.0')
 #from . import language
 import gettext
 from gettext import gettext as _
@@ -11,7 +12,6 @@ from .CalendarWindow import  Calendar
 from .TimeTableStore import TimeTableStore
 from .utils import ui_translate
 from gi.repository import Gtk, Gio, GLib, Gdk
-gi.require_version('Gtk', '3.0')
 
 
 
@@ -31,7 +31,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.environment = Environment(self)
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=1)
-        self.add(vbox)
+        self.set_child(vbox)
 
         self.stack = Gtk.Stack()
         self.stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
@@ -54,8 +54,8 @@ class MainWindow(Gtk.ApplicationWindow):
         self.stack_switcher.set_stack(self.stack)
         self.stack_switcher.props.halign = Gtk.Align.CENTER
         #vbox.set_center_widget(stack_switcher)
-        vbox.pack_start(self.stack_switcher, True, True, 0)
-        vbox.pack_end(self.stack, False, False, 0)
+        vbox.append(self.stack_switcher)
+        vbox.append(self.stack)
 
         self.__header()
 
@@ -119,7 +119,6 @@ class MainWindow(Gtk.ApplicationWindow):
     def __header(self):
         """Creates the headerbar with the navigation- and menu buttons."""
         self.hb = Gtk.HeaderBar()
-        self.hb.set_show_close_button(True)
         self.set_titlebar(self.hb)
         # after loading filename
         self.props.title = _("Timetable") + ": " + str(self.environment.currentFileName)
@@ -168,7 +167,7 @@ class MainWindow(Gtk.ApplicationWindow):
         button.set_popover(popover)
         icon = Gio.ThemedIcon(name="open-menu-symbolic")
         image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
-        button.add(image)
+        button.set_child(image)
         self.hb.pack_end(button)
 
         # for calling by shortcut F10
@@ -181,7 +180,7 @@ class MainWindow(Gtk.ApplicationWindow):
         button = Gtk.Button()
         icon = Gio.ThemedIcon(name="help-browser-symbolic")
         image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
-        button.add(image)
+        button.set_child(image)
         button.connect("clicked", self.__helpClicked)
         self.hb.pack_end(button)
 
@@ -189,7 +188,7 @@ class MainWindow(Gtk.ApplicationWindow):
         button = Gtk.Button()
         icon = Gio.ThemedIcon(name="preferences-desktop-keyboard-symbolic")
         image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
-        button.add(image)
+        button.set_child(image)
         button.connect("clicked", self.__shortcutsClicked)
         self.hb.pack_end(button)
 
@@ -200,22 +199,22 @@ class MainWindow(Gtk.ApplicationWindow):
 
         # left previous week
         button = Gtk.Button()
-        button.add(Gtk.Arrow(Gtk.ArrowType.LEFT, Gtk.ShadowType.NONE))
-        box.add(button)
+        button.set_icon_name("go-previous-symbolic")
+        box.append(button)
         button.connect("clicked", self.__prevWeekclicked)
 
         # right: next week
         button = Gtk.Button()
-        button.add(Gtk.Arrow(Gtk.ArrowType.RIGHT, Gtk.ShadowType.NONE))
-        box.add(button)
+        button.set_icon_name("go-next-symbolic")
+        box.append(button)
         button.connect("clicked", self.__nextWeekclicked)
 
         # current week
         button = Gtk.Button()
         icon = Gio.ThemedIcon(name="document-open-recent-symbolic")
         image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
-        button.add(image)
-        box.add(button)
+        button.set_child(image)
+        box.append(button)
         button.connect("clicked", self.__currentWeekclicked)
 
         #################
@@ -225,8 +224,8 @@ class MainWindow(Gtk.ApplicationWindow):
             button = Gtk.Button()
             icon = Gio.ThemedIcon(name="view-refresh")
             image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
-            button.add(image)
-            box.add(button)
+            button.set_child(image)
+            box.append(button)
             button.connect("clicked", self.__testclicked)
             self.test = False
         #################
@@ -274,7 +273,7 @@ class MainWindow(Gtk.ApplicationWindow):
         aboutdialog.connect("response", lambda x, y: x.destroy())
 
         # show
-        aboutdialog.show()
+        aboutdialog.present()
 
     def __nextWeekclicked(self, button):
         """When clicked on next-week-button, shift for one week in the
@@ -300,7 +299,7 @@ class MainWindow(Gtk.ApplicationWindow):
         swin = builder.get_object("shortcuts")
         ui_translate(builder)     # necessary for .ui files, see utils.py
 
-        swin.show_all()
+        swin.present()
 
     def __prevWeekclicked(self, button):
         """When clicked on previous-week-button, shift for one week in the
@@ -469,7 +468,7 @@ class SettingsButton(Gtk.Button):
         # set icon
         icon = Gio.ThemedIcon(name="preferences-system-symbolic")
         image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
-        self.add(image)
+        self.set_child(image)
 
         self.__popover = Gtk.Popover()
         grid = Gtk.Grid()
@@ -517,10 +516,11 @@ class SettingsButton(Gtk.Button):
         #grid.attach(sw, 1, 3, 1, 1)
 
         # signals
-        self.__popover.add(grid)
+        self.__popover.set_child(grid)
         self.__popover.connect("map", self.__open)
         self.__popover.connect("closed", self.__close)
         self.connect("clicked", self.__togglePopup)
+        self.set_popover(self.__popover)
 
     def __show_hide_sat(self, sw, state):
         """Displays or hides the daygrid for the saturday.
@@ -528,9 +528,9 @@ class SettingsButton(Gtk.Button):
         This is called with a signal, when the button changes.
         """
         if state == True:
-            self.window.weekWid.sat.show()
+            self.window.weekWid.sat.set_visible(True)
         else:
-            self.window.weekWid.sat.hide()
+            self.window.weekWid.sat.set_visible(False)
 
     def __show_hide_lines(self, spin):
         """Changes the number of periods to display in the daygrid.
@@ -555,8 +555,6 @@ class SettingsButton(Gtk.Button):
     def __togglePopup(self, button):
         """Displays or hides the settings-menu, when the "button" is clicked.
         Called by a signal."""
-        self.__popover.set_relative_to(button)
-        self.__popover.show_all()
         self.__popover.popup()
 
 

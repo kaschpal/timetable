@@ -94,3 +94,40 @@ class MemoCalendar(Gtk.Calendar):
         self.clear_marks() # remove all previous
         # mark days with entry
         for d in range(1, last+1):
+            if self.parent.parent.environment.timeTab.getCalendarEntry(datetime.date(day=d,month=m,year=y)) != "":
+                self.mark_day(d)
+
+
+class MemoView(Gtk.TextView):
+    """The textfiled, where the memos are edited."""
+
+    def __init__(self, parent):
+        Gtk.TextView.__init__(self)
+
+        self.buffer = Gtk.TextBuffer()
+        self.set_buffer(self.buffer)
+        self.parent = parent
+        # when disappearing, save content
+        self.connect("unmap", self.save)
+
+    def loadEntry(self, date):
+        """Loads the string, which belongs to "date" into the textbuffer"""
+        s = self.parent.parent.environment.timeTab.getCalendarEntry(date)
+        self.buffer.set_text(s)
+
+    def update(self):
+        """Looks into the calendar, which day is marked and loads this memo-string."""
+        date = self.parent.calendar.currentSelectionDate
+        self.loadEntry(date)
+
+    def save(self, wid=None):
+        """Saves the current memo-string into the timetablestore."""
+        txt = self.getText()
+        date = self.parent.calendar.currentSelectionDate
+        self.parent.parent.environment.timeTab.putCalendarEntry(date, txt)
+
+    def getText(self):
+        """Gets the text from the buffer as a string."""
+        start = self.buffer.get_start_iter()
+        end = self.buffer.get_end_iter()
+        return self.buffer.get_text(start, end, False)
