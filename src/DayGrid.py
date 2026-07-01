@@ -178,11 +178,15 @@ class CalendarButton(Gtk.Button):
         Gtk.Button.__init__(self)
         self.parent = parent
 
-        # init icons - GTK4 uses -1 instead of Gtk.IconSize.BUTTON
+        # init icons - GTK4 uses different API
         icon = Gio.ThemedIcon(name="io.github.kaschpal.star-grey")
-        self.__empty_image = Gtk.Image.new_from_gicon(icon, -1)
+        self.__empty_image = Gtk.Image.new_from_gicon(icon)
+        self.__empty_image.set_icon_size(Gtk.IconSize.NORMAL)
+        
         icon = Gio.ThemedIcon(name="io.github.kaschpal.star-orange")
-        self.__not_empty_image = Gtk.Image.new_from_gicon(icon, -1)
+        self.__not_empty_image = Gtk.Image.new_from_gicon(icon)
+        self.__not_empty_image.set_icon_size(Gtk.IconSize.NORMAL)
+        
         self.__current_image = None
 
         # calendar textview
