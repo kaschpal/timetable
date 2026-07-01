@@ -273,7 +273,8 @@ class ClassEntry(Gtk.Entry):
         self.period = period
 
         self.changeHandler = self.connect("activate", self.__onActivate)
-        self.focusOutHandler = self.connect("focus-out-event", self.__onFocusOut)
+        # GTK4 uses "focus-out" instead of "focus-out-event"
+        self.focusOutHandler = self.connect("focus-out", self.__onFocusOut)
         #self.changeHandler = self.connect("changed", self.__onChange)
 
         self.update()
