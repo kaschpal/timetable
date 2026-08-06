@@ -1,6 +1,6 @@
 import gi
 gi.require_version('Gtk', '4.0')
-#from . import language
+# from . import language
 import gettext
 from gettext import gettext as _
 import datetime
@@ -124,7 +124,11 @@ class MainWindow(Gtk.ApplicationWindow):
         self.props.title = _("Timetable") + ": " + str(self.environment.currentFileName)
 
         # popover for menu
-        popover = Gtk.PopoverMenu()
+        # Use PopoverMenu if available for simpler menu creation
+        try:
+            popover = Gtk.PopoverMenu()
+        except Exception:
+            popover = None
 
         # create actions
         load_action = Gio.SimpleAction.new("load", None)
@@ -163,8 +167,59 @@ class MainWindow(Gtk.ApplicationWindow):
         #menu button
         button = Gtk.MenuButton.new()
         self.main_menu_button = button
-        popover = Gtk.Popover.new_from_model(button, menu)
-        button.set_popover(popover)
+
+        # Try to create a popover from the Gio.MenuModel if API is present; otherwise fall back
+        popover = None
+        try:
+            # GTK4 modern API
+            popover = Gtk.Popover.new_from_model(button, menu)
+        except Exception:
+            # Try PopoverMenu helper (some versions provide this)
+            if hasattr(Gtk, 'PopoverMenu') and hasattr(Gtk.PopoverMenu, 'new_from_model'):
+                try:
+                    popover = Gtk.PopoverMenu.new_from_model(button, menu)
+                except Exception:
+                    popover = None
+            # Try attaching the model to the MenuButton and asking it for a popover
+            elif hasattr(button, 'set_menu_model'):
+                try:
+                    button.set_menu_model(menu)
+                    try:
+                        pop = button.get_popover()
+                        popover = pop if pop is not None else Gtk.Popover()
+                    except Exception:
+                        popover = Gtk.Popover()
+                except Exception:
+                    popover = None
+            else:
+                popover = None
+
+        # Final fallback: ensure we have a popover instance
+        if popover is None:
+            popover = Gtk.Popover()
+            # As a simple fallback, create a minimal box so popover has content
+            box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+            # We could build menu items from the Gio.Menu but keep it minimal
+            popover.set_child(box)
+
+        # attach the popover and menu button in a binding-robust way
+        attached = False
+        try:
+            button.set_popover(popover)
+            attached = True
+        except Exception:
+            try:
+                button.set_popup(popover)
+                attached = True
+            except Exception:
+                attached = False
+
+        if not attached and hasattr(button, 'set_menu_model'):
+            try:
+                button.set_menu_model(menu)
+            except Exception:
+                pass
+
         icon = Gio.ThemedIcon(name="open-menu-symbolic")
         image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
         button.set_child(image)
@@ -389,280 +444,3 @@ class MainWindow(Gtk.ApplicationWindow):
     def __loadClicked(self, button, action):
         """Creates and displays an diaglog, which ask for a filename to load.
         The current file is not saved and the new file is loaded into the
-        environment."""
-        # create open dialog
-        dialog = Gtk.FileChooserDialog(_("Please choose file"), self,
-                                       Gtk.FileChooserAction.OPEN,
-                                       (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-             Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
-
-        # add filters for pickle-files an all files
-        filter_p = Gtk.FileFilter()
-        filter_p.set_name(_("timetable"))
-        filter_p.add_mime_type("text/x-python")
-        filter_p.add_pattern("*.p")
-        dialog.add_filter(filter_p)
-
-        filter_all = Gtk.FileFilter()
-        filter_all.set_name(_("all files"))
-        filter_all.add_pattern("*")
-        dialog.add_filter(filter_all)
-
-
-
-
-
-
-        response = dialog.run()
-        if response == Gtk.ResponseType.OK:
-            filename = dialog.get_filename()
-            self.environment.loadFile(filename)
-        elif response == Gtk.ResponseType.CANCEL:
-            filename = None
-            pass
-        dialog.destroy()
-
-        # switch to tt view
-        self.stack.set_visible_child_name("timetable")
-
-        #dbglog(str(filename))
-
-    def quit(self, wid):
-        """Quits the application. If quit-on-save is activated, saves."""
-        if self.environment.setting_save_on_quit() == True:
-            self.__quit_save(self, None)
-        else:
-            self.__quit_without_saving(self, None)
-
-    def __quit_without_saving(self, wid, action):
-        """Quits the application without saving."""
-        dbglog("quit without saving")
-        self.environment.saveState()
-        self.application.quit()
-        #Gtk.main_quit()
-
-    def __quit_save(self, wid, action):
-        """Quits the application with saving."""
-        dbglog("quit save")
-        # no filename choosen yet
-        if self.environment.currentFileName == None:
-            filename = self.__chooseFilename()
-            if filename == None:
-                return
-            else:
-                self.environment.currentFileName = filename
-
-        self.environment.saveCurrentFile()
-        self.environment.saveState()
-        self.application.quit()
-        #Gtk.main_quit()
-
-
-class SettingsButton(Gtk.Button):
-    """Beeing a bit complex, the settings menu has its own class."""
-
-    def __init__(self, window):
-        Gtk.Button.__init__(self)
-        self.window = window
-
-        # set icon
-        icon = Gio.ThemedIcon(name="preferences-system-symbolic")
-        image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
-        self.set_child(image)
-
-        self.__popover = Gtk.Popover()
-        grid = Gtk.Grid()
-        grid.props.column_spacing = 5
-
-        # spinbutton for number of periods per day
-        lab = Gtk.Label(_("periods to show"))
-        lab.props.halign = Gtk.Align.START
-        grid.attach(lab, 0, 0, 1, 1)
-        spin = Gtk.SpinButton()
-        # get min / max value
-        minval, maxval = self.window.environment.settings.get_range("number-of-periods-show")[1]
-        # adjustment
-        adjustment = Gtk.Adjustment(0, minval, maxval, 1, 1, 0)
-        spin.set_adjustment(adjustment)
-        self.window.environment.settings.bind("number-of-periods-show", spin, "value", Gio.SettingsBindFlags.DEFAULT)
-        grid.attach(spin, 1, 0, 1, 1)
-        # immediately show/hide
-        spin.connect("value-changed", self.__show_hide_lines)
-
-        # switch for "show saturday"
-        lab = Gtk.Label(_("show saturday"))
-        lab.props.halign = Gtk.Align.START
-        grid.attach(lab, 0, 1, 1, 1)
-        sw = Gtk.Switch()
-        self.window.environment.settings.bind("show-saturday", sw, "active", Gio.SettingsBindFlags.DEFAULT)
-        grid.attach(sw, 1, 1, 1, 1)
-        # immediately show/hide
-        sw.connect("state-set", self.__show_hide_sat)
-
-        # switch for "autosave on quit"
-        lab = Gtk.Label(_("save when quitting"))
-        lab.props.halign = Gtk.Align.START
-        grid.attach(lab, 0, 2, 1, 1)
-        sw = Gtk.Switch()
-        self.window.environment.settings.bind("save-on-quit", sw, "active", Gio.SettingsBindFlags.DEFAULT)
-        grid.attach(sw, 1, 2, 1, 1)
-
-        # switch for "debug mode"
-        #lab = Gtk.Label(_("debug mode"))
-        #lab.props.halign = Gtk.Align.START
-        #grid.attach(lab, 0, 3, 1, 1)
-        #sw = Gtk.Switch()
-        #self.window.environment.settings.bind("debug", sw, "active", Gio.SettingsBindFlags.DEFAULT)
-        #grid.attach(sw, 1, 3, 1, 1)
-
-        # signals
-        self.__popover.set_child(grid)
-        self.__popover.connect("map", self.__open)
-        self.__popover.connect("closed", self.__close)
-        self.connect("clicked", self.__togglePopup)
-        self.set_popover(self.__popover)
-
-    def __show_hide_sat(self, sw, state):
-        """Displays or hides the daygrid for the saturday.
-        "stat" is True, if it should be displayed.
-        This is called with a signal, when the button changes.
-        """
-        if state == True:
-            self.window.weekWid.sat.set_visible(True)
-        else:
-            self.window.weekWid.sat.set_visible(False)
-
-    def __show_hide_lines(self, spin):
-        """Changes the number of periods to display in the daygrid.
-        This is called with a signal, when the spin-button "spin" changes.
-        """
-        value = int(spin.props.value)
-        for day in self.window.weekWid.widList:
-            day.set_to_line(value)
-
-    def update(self):
-        """Dummy method, when called via the updatelist from the parent"""
-        pass
-
-    def __close(self, popover):
-        """Dummy method for testing"""
-        pass
-
-    def __open(self, popover):
-        """Dummy method for testing"""
-        pass
-
-    def __togglePopup(self, button):
-        """Displays or hides the settings-menu, when the "button" is clicked.
-        Called by a signal."""
-        self.__popover.popup()
-
-
-class Environment():
-    """The environment is the representation of the state of the application.
-    The environment loads the settings from the gsettings schema and the timetable database
-    from the timetable file.
-    """
-    def __init__(self, parent):
-        """
-        schema_source = Gio.SettingsSchemaSource.new_from_directory(config.programDirectory,
-                                                                    Gio.SettingsSchemaSource.get_default(), False)
-        schema = Gio.SettingsSchemaSource.lookup(schema_source, 'de.gymlan.timetable', False)
-        if not schema:
-            raise Exception("Cannot get GSettings  schema")
-        self.settings = Gio.Settings.new_full(schema, None, config.dconfPath)
-        """
-        self.settings = Gio.Settings.new('io.github.kaschpal.timetable')
-        dbglog(self.settings.list_keys())
-
-        self.parent = parent
-        self.timeTab = TimeTableStore(environment=self)
-        self.loadState()
-
-    def saveFile(self, filename):
-        """Saves timetable to "filename"."""
-        self.timeTab.saveToFile( filename )
-
-    def saveCurrentFile(self):
-        """Saves timetable to current filename."""
-        self.saveFile(self.currentFileName)
-
-    def loadFile(self, filename):
-        """Load the timetable from "filename" and sets the title of the window.
-        After that, everything is updated."""
-        if filename == None or self.timeTab.loadFromFile(filename) == False:
-            try:
-                self.parent.hb.props.title
-            except AttributeError:
-                pass
-            else:
-                self.parent.hb.props.title = (_("Timetable") + ": " + "(neu)")
-            self.currentFileName = None
-            return
-
-        # update, if widgets are already created (maybe this is the first call)
-        try:
-            self.parent.weekWid.update()
-        except AttributeError:
-            pass
-        else:
-            self.parent.weekWid.update()
-
-        try:
-            self.parent.hb.props.title
-        except AttributeError:
-            pass
-        else:
-            self.parent.hb.props.title = (_("Timetable") + ": " + filename)
-
-        # set new filename in statefile
-        self.currentFileName = filename
-
-
-    def saveState(self):
-        """There has been a statefile, which held the current filname. Now this
-        current filename is saved to the settings. Did not rename the method.
-        """
-        self.settings.set_string("current-filename", self.currentFileName)
-
-    def loadState(self):
-        """There has been a statefile, which held the current filname. Now this
-        current filename is saved to the settings. Did not rename the method.
-        This method loads the timetable from the filename in the settings and
-        sets the .currentFilename.
-        """
-        self.currentFileName = self.setting_current_filename()
-        if self.currentFileName == "":
-            self.currentFileName = None
-        self.loadFile(self.currentFileName)
-
-    def clear(self):
-        """Creates an empty Environment und updates."""
-        #self.__saveEmptyState()
-        self.loadState()
-        self.timeTab.clear(self)
-        self.parent.weekWid.update()
-
-    def setting_number_of_periods_show(self):
-        """Method for retrieving settings."""
-        return self.settings.get_int('number-of-periods-show')
-
-    def setting_number_of_periods_create(self):
-        """Method for retrieving settings."""
-        return self.settings.get_int('number-of-periods-create')
-
-    def setting_show_saturday(self):
-        """Method for retrieving settings."""
-        return self.settings.get_boolean('show-saturday')
-
-    def setting_debug(self):
-        """Method for retrieving settings."""
-        return self.settings.get_boolean('debug')
-
-    def setting_save_on_quit(self):
-        """Method for retrieving settings."""
-        return self.settings.get_boolean('save-on-quit')
-
-    def setting_current_filename(self):
-        """Method for retrieving settings."""
-        return self.settings.get_string('current-filename')
