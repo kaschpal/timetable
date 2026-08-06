@@ -1,6 +1,6 @@
 import gi
 gi.require_version('Gtk', '4.0')
-# from . import language
+#from . import language
 import gettext
 from gettext import gettext as _
 import datetime
@@ -444,3 +444,138 @@ class MainWindow(Gtk.ApplicationWindow):
     def __loadClicked(self, button, action):
         """Creates and displays an diaglog, which ask for a filename to load.
         The current file is not saved and the new file is loaded into the
+        environment."""
+        # create open dialog
+        dialog = Gtk.FileChooserDialog(_("Please choose file"), self,
+                                       Gtk.FileChooserAction.OPEN,
+                                       (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                                        Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+
+        # add filters for pickle-files an all files
+        filter_p = Gtk.FileFilter()
+        filter_p.set_name(_("timetable"))
+        filter_p.add_mime_type("text/x-python")
+        filter_p.add_pattern("*.p")
+        dialog.add_filter(filter_p)
+
+        filter_all = Gtk.FileFilter()
+        filter_all.set_name(_("all files"))
+        filter_all.add_pattern("*")
+        dialog.add_filter(filter_all)
+
+
+
+
+
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            filename = dialog.get_filename()
+            self.environment.loadFile(filename)
+        elif response == Gtk.ResponseType.CANCEL:
+            filename = None
+            pass
+        dialog.destroy()
+
+        # switch to tt view
+        self.stack.set_visible_child_name("timetable")
+
+        #dbglog(str(filename))
+
+    def quit(self, wid):
+        """Quits the application. If quit-on-save is activated, saves."""
+        if self.environment.setting_save_on_quit() == True:
+            self.__quit_save(self, None)
+        else:
+            self.__quit_without_saving(self, None)
+
+    def __quit_without_saving(self, wid, action):
+        """Quits the application without saving."""
+        dbglog("quit without saving")
+        self.environment.saveState()
+        self.application.quit()
+        #Gtk.main_quit()
+
+    def __quit_save(self, wid, action):
+        """Quits the application with saving."""
+        dbglog("quit save")
+        # no filename choosen yet
+        if self.environment.currentFileName == None:
+            filename = self.__chooseFilename()
+            if filename == None:
+                return
+            else:
+                self.environment.currentFileName = filename
+
+        self.environment.saveCurrentFile()
+        self.environment.saveState()
+        self.application.quit()
+        #Gtk.main_quit()
+
+
+class SettingsButton(Gtk.Button):
+    """Beeing a bit complex, the settings menu has its own class."""
+
+    def __init__(self, window):
+        Gtk.Button.__init__(self)
+        self.window = window
+
+        # set icon
+        icon = Gio.ThemedIcon(name="preferences-system-symbolic")
+        image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
+        self.set_child(image)
+
+        self.__popover = Gtk.Popover()
+        grid = Gtk.Grid()
+        grid.props.column_spacing = 5
+
+        # spinbutton for number of periods per day
+        lab = Gtk.Label(_("periods to show"))
+        lab.props.halign = Gtk.Align.START
+        grid.attach(lab, 0, 0, 1, 1)
+        spin = Gtk.SpinButton()
+        # get min / max value
+        minval, maxval = self.window.environment.settings.get_range("number-of-periods-show")[1]
+        # adjustment
+        adjustment = Gtk.Adjustment(0, minval, maxval, 1, 1, 0)
+        spin.set_adjustment(adjustment)
+        self.window.environment.settings.bind("number-of-periods-show", spin, "value", Gio.SettingsBindFlags.DEFAULT)
+        grid.attach(spin, 1, 0, 1, 1)
+        # immediately show/hide
+        spin.connect("value-changed", self.__show_hide_lines)
+
+        # switch for "show saturday"
+        lab = Gtk.Label(_("show saturday"))
+        lab.props.halign = Gtk.Align.START
+        grid.attach(lab, 0, 1, 1, 1)
+        sw = Gtk.Switch()
+        self.window.environment.settings.bind("show-saturday", sw, "active", Gio.SettingsBindFlags.DEFAULT)
+        grid.attach(sw, 1, 1, 1, 1)
+        # immediately show/hide
+        sw.connect("state-set", self.__show_hide_sat)
+
+        # switch for "autosave on quit"
+        lab = Gtk.Label(_("save when quitting"))
+        lab.props.halign = Gtk.Align.START
+        grid.attach(lab, 0, 2, 1, 1)
+        sw = Gtk.Switch()
+        self.window.environment.settings.bind("save-on-quit", sw, "active", Gio.SettingsBindFlags.DEFAULT)
+        grid.attach(sw, 1, 2, 1, 1)
+
+        # switch for "debug mode"
+        #lab = Gtk.Label(_("debug mode"))
+        #lab.props.halign = Gtk.Align.START
+        #grid.attach(lab, 0, 3, 1, 1)
+        #sw = Gtk.Switch()
+        #self.window.environment.settings.bind("debug", sw, "active", Gio.SettingsBindFlags.DEFAULT)
+        #grid.attach(sw, 1, 3, 1, 1)
+
+        # signals
+        self.__popover.set_child(grid)
+        self.__popover.connect("map", self.__open)
+        self.__popover.connect("closed", self.__close)
+        self.connect("clicked", self.__togglePopup)
+        self.set_popover(self.__popover)
+
+    def __show_hide_sat(self, sw, state):
+        """Displays or hides the daygrid for the saturday.
+        """ 
