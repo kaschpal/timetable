@@ -81,3 +81,17 @@ class WeekGrid(Gtk.Grid):
         # should we show the saturday?
         if self.window.environment.setting_show_saturday() == True:
             self.sat.set_visible(True)
+
+    def setToday(self):
+        """Adjust the week so it contains today.
+
+        If today is Saturday or Sunday, advance to the next week so the view
+        shows the upcoming week instead of the weekend of the current week.
+        Then refresh child widgets.
+        """
+        today = datetime.date.today()
+        # If today is Saturday (5) or Sunday (6), show the next week
+        if today.weekday() >= 5:
+            self.mondayDate = self.mondayDate + datetime.timedelta(days=7)
+        # Ensure child widgets reflect the (possibly updated) mondayDate
+        self.update()
