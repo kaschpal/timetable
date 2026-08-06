@@ -1,6 +1,6 @@
 import gi
 gi.require_version('Gtk', '4.0')
-#from . import language
+# from . import language
 import gettext
 from gettext import gettext as _
 import datetime
@@ -578,4 +578,145 @@ class SettingsButton(Gtk.Button):
 
     def __show_hide_sat(self, sw, state):
         """Displays or hides the daygrid for the saturday.
-        """ 
+        """
+        if state == True:
+            self.window.weekWid.sat.set_visible(True)
+        else:
+            self.window.weekWid.sat.set_visible(False)
+
+    def __show_hide_lines(self, spin):
+        """Changes the number of periods to display in the daygrid.
+        This is called with a signal, when the spin-button "spin" changes.
+        """
+        value = int(spin.props.value)
+        for day in self.window.weekWid.widList:
+            day.set_to_line(value)
+
+    def update(self):
+        """Dummy method, when called via the updatelist from the parent"""
+        pass
+
+    def __close(self, popover):
+        """Dummy method for testing"""
+        pass
+
+    def __open(self, popover):
+        """Dummy method for testing"""
+        pass
+
+    def __togglePopup(self, button):
+        """Displays or hides the settings-menu, when the "button" is clicked.
+        Called by a signal."""
+        self.__popover.set_relative_to(button)
+        self.__popover.show_all()
+        self.__popover.popup()
+
+
+class Environment():
+    """The environment is the representation of the state of the application.
+    The environment loads the settings from the gsettings schema and the timetable database
+    from the timetable file.
+    """
+    def __init__(self, parent):
+        """
+        schema_source = Gio.SettingsSchemaSource.new_from_directory(config.programDirectory,
+                                                                    Gio.SettingsSchemaSource.get_default(), False)
+        schema = Gio.SettingsSchemaSource.lookup(schema_source, 'de.gymlan.timetable', False)
+        if not schema:
+            raise Exception("Cannot get GSettings  schema")
+        self.settings = Gio.Settings.new_full(schema, None, config.dconfPath)
+        """
+        self.settings = Gio.Settings.new('io.github.kaschpal.timetable')
+        dbglog(self.settings.list_keys())
+
+        self.parent = parent
+        self.timeTab = TimeTableStore(environment=self)
+        self.loadState()
+
+    def saveFile(self, filename):
+        """Saves timetable to "filename"."""
+        self.timeTab.saveToFile( filename )
+
+    def saveCurrentFile(self):
+        """Saves timetable to current filename."""
+        self.saveFile(self.currentFileName)
+
+    def loadFile(self, filename):
+        """Load the timetable from "filename" and sets the title of the window.
+        After that, everything is updated."""
+        if filename == None or self.timeTab.loadFromFile(filename) == False:
+            try:
+                self.parent.hb.props.title
+            except AttributeError:
+                pass
+            else:
+                self.parent.hb.props.title = (_("Timetable") + ": " + "(neu)")
+            self.currentFileName = None
+            return
+
+        # update, if widgets are already created (maybe this is the first call)
+        try:
+            self.parent.weekWid.update()
+        except AttributeError:
+            pass
+        else:
+            self.parent.weekWid.update()
+
+        try:
+            self.parent.hb.props.title
+        except AttributeError:
+            pass
+        else:
+            self.parent.hb.props.title = (_("Timetable") + ": " + filename)
+
+        # set new filename in statefile
+        self.currentFileName = filename
+
+
+    def saveState(self):
+        """There has been a statefile, which held the current filname. Now this
+        current filename is saved to the settings. Did not rename the method.
+        """
+        self.settings.set_string("current-filename", self.currentFileName)
+
+    def loadState(self):
+        """There has been a statefile, which held the current filname. Now this
+        current filename is saved to the settings. Did not rename the method.
+        This method loads the timetable from the filename in the settings and
+        sets the .currentFilename.
+        """
+        self.currentFileName = self.setting_current_filename()
+        if self.currentFileName == "":
+            self.currentFileName = None
+        self.loadFile(self.currentFileName)
+
+    def clear(self):
+        """Creates an empty Environment und updates."""
+        #self.__saveEmptyState()
+        self.loadState()
+        self.timeTab.clear(self)
+        self.parent.weekWid.update()
+
+    def setting_number_of_periods_show(self):
+        """Method for retrieving settings."""
+        return self.settings.get_int('number-of-periods-show')
+
+    def setting_number_of_periods_create(self):
+        """Method for retrieving settings."""
+        return self.settings.get_int('number-of-periods-create')
+
+    def setting_show_saturday(self):
+        """Method for retrieving settings."""
+        return self.settings.get_boolean('show-saturday')
+
+    def setting_debug(self):
+        """Method for retrieving settings."""
+        return self.settings.get_boolean('debug')
+
+    def setting_save_on_quit(self):
+        """Method for retrieving settings."""
+        return self.settings.get_boolean('save-on-quit')
+
+    def setting_current_filename(self):
+        """Method for retrieving settings."""
+        return self.settings.get_string('current-filename')
