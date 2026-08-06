@@ -41,7 +41,37 @@ class MemoCalendar(Gtk.Calendar):
         Gtk.Calendar.__init__(self)
         self.parent = parent
         self.connect("day-selected", self.__selectHandler)
-        self.connect("day-selected-double-click", self.__doubleclickHandler)
+        # Try to connect the double-click signal; if not available, attach a GestureClick
+        try:
+            self.connect("day-selected-double-click", self.__doubleclickHandler)
+        except Exception:
+            # Fallback: use GestureClick to detect double-press on the widget
+            try:
+                # Some bindings accept the widget in the constructor
+                try:
+                    gesture = Gtk.GestureClick.new(self)
+                except TypeError:
+                    gesture = Gtk.GestureClick.new()
+                    if hasattr(gesture, 'set_widget'):
+                        gesture.set_widget(self)
+                # attach gesture to widget (GTK4: add_controller)
+                if hasattr(self, 'add_controller'):
+                    self.add_controller(gesture)
+                elif hasattr(self, 'add_events'):
+                    # older bindings: nothing to do, gesture may auto-attach
+                    pass
+                # connect pressed handler and check for double press
+                def _on_pressed(gesture, n_press, x, y):
+                    if n_press == 2:
+                        # emulate the double-click handler
+                        try:
+                            self.__doubleclickHandler(self)
+                        except Exception:
+                            pass
+                gesture.connect("pressed", _on_pressed)
+            except Exception:
+                # Last-resort: ignore double-click support
+                dbglog("MemoCalendar: double-click not supported in this environment")
         self.connect("month-changed", self.update)
 
         # call selection handler on current (initial) selection
