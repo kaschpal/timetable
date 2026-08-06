@@ -72,7 +72,17 @@ class MemoCalendar(Gtk.Calendar):
             except Exception:
                 # Last-resort: ignore double-click support
                 dbglog("MemoCalendar: double-click not supported in this environment")
-        self.connect("month-changed", self.update)
+
+        # Connect month change to update() if available; try signal first, then property notifications
+        try:
+            self.connect("month-changed", self.update)
+        except Exception:
+            try:
+                # GTK bindings that don't expose month-changed often have month/year properties
+                self.connect("notify::month", lambda w, p: self.update())
+                self.connect("notify::year", lambda w, p: self.update())
+            except Exception:
+                dbglog("MemoCalendar: month change notification not available in this environment")
 
         # call selection handler on current (initial) selection
         self.__selectHandler(self)
