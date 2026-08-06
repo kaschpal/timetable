@@ -272,10 +272,7 @@ class ClassEntry(Gtk.Entry):
         self.period = period
 
         self.changeHandler = self.connect("activate", self.__onActivate)
-        # use EventControllerFocus for focus-out handling (no args to new())
-        self._focus_controller = Gtk.EventControllerFocus.new()
-        self._focus_controller.set_widget(self)
-        self.focusOutHandler = self._focus_controller.connect("leave", self.__onFocusOut)
+        self.focusOutHandler = self.connect("focus-out-event", self.__onFocusOut)
         #self.changeHandler = self.connect("changed", self.__onChange)
 
         self.update()
@@ -348,8 +345,7 @@ class ClassEntry(Gtk.Entry):
 
             # if the class has been set on this day, paint red
             # also, if it is a dot-entry
-            if (self.parent.parent.window.environment.timeTab.classNameIsEdited(self.date, self.period)
-                or self.parent.parent.window.environment.timeTab.classNameIsDotEntry(self.date, self.period)):
+            if self.parent.parent.window.environment.timeTab.classNameIsEdited(self.date, self.period) or self.parent.parent.window.environment.timeTab.classNameIsDotEntry(self.date, self.period)[...]
                 RED = Gdk.Color(50000, 0, 0)
                 self.modify_fg(Gtk.StateFlags.NORMAL, RED)
             else:
