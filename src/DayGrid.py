@@ -386,7 +386,16 @@ class TopicEntry(Gtk.Entry):
         self.changeHandler = self.connect("changed", self.__onChange)
         #self.connect("button-press-event", self.__onDoubleClick)
         #self.connect("motion-notify-event", self.__on_move_cursor)
-        self.connect("key-press-event",self.__on_jump)
+        # GTK4: use EventControllerKey for key events (no key-press-event signal)
+        try:
+            # some bindings accept the widget in the constructor
+            self._key_controller = Gtk.EventControllerKey.new(self)
+        except TypeError:
+            # fallback: construct without args and attach if possible
+            self._key_controller = Gtk.EventControllerKey.new()
+            if hasattr(self._key_controller, 'set_widget'):
+                self._key_controller.set_widget(self)
+        self._key_controller.connect("key-pressed", self.__on_key)
 
         self.update()
 
@@ -400,12 +409,11 @@ class TopicEntry(Gtk.Entry):
         self.parent.parent.window.environment.timeTab.changeTopic(date, period, topic)
         self.update()
 
-    def __on_jump(self, widget, event):
-        # check the event modifiers (can also use SHIFTMASK, etc)
-        ctrl = (event.state & Gdk.ModifierType.CONTROL_MASK)
+    def __on_key(self, controller, keyval, keycode, state):
+        # controller signature: (self, keyval, keycode, state)
+        ctrl = (state & Gdk.ModifierType.CONTROL_MASK)
 
-        # see if we recognise a keypress
-        if ctrl and event.keyval == Gdk.KEY_j:
+        if ctrl and keyval == Gdk.KEY_j:
             nb = self.parent.parent.window.classNoteb
             nb.update_tabs()   # if the sequence view has never been started, the tabs are not created yet
 
@@ -417,7 +425,7 @@ class TopicEntry(Gtk.Entry):
 
             # prevent jumping to solo-dot-classes
             if class_name not in self.parent.parent.window.environment.timeTab.getClassList():
-                return
+                return False
 
             # to sequence view to class
             self.parent.parent.window.stack.set_visible_child_name("sequence")
@@ -439,11 +447,11 @@ class TopicEntry(Gtk.Entry):
             cursor.forward_to_line_end()
             buf.select_range(line_begin, cursor)
 
-
             # scroll
             tv.scroll_mark_onscreen(buf.get_insert())
+            return True
 
-
+        return False
 
     def update(self):
         """Gets all relevant information from
