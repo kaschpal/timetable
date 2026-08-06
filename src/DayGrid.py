@@ -274,7 +274,9 @@ class ClassEntry(Gtk.Entry):
 
         self.changeHandler = self.connect("activate", self.__onActivate)
         # GTK4: use an EventControllerFocus to detect focus-leave (focus-out)
-        self._focus_controller = Gtk.EventControllerFocus.new(self)
+        # create controller with no arguments and attach the widget
+        self._focus_controller = Gtk.EventControllerFocus.new()
+        self._focus_controller.set_widget(self)
         # connect to 'leave' which corresponds to focus-out
         self.focusOutHandler = self._focus_controller.connect("leave", lambda *a: self.__onFocusOut())
         #self.changeHandler = self.connect("changed", self.__onChange)
